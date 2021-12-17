@@ -1,0 +1,405 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D77C22B1276C22C500AFD4CE /* MetalBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C22B0276C22C500AFD4CE /* MetalBuffer.swift */; };
+		D77C22B3276C231900AFD4CE /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C22B2276C231900AFD4CE /* Helpers.swift */; };
+		D77C22B5276C240C00AFD4CE /* PLYFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C22B4276C240C00AFD4CE /* PLYFile.swift */; };
+		D79261CA276634E10011D79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261C9276634E10011D79A /* AppDelegate.swift */; };
+		D79261CC276634E10011D79A /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D79261CB276634E10011D79A /* Shaders.metal */; };
+		D79261CF276634E10011D79A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261CE276634E10011D79A /* Renderer.swift */; };
+		D79261D1276634E10011D79A /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261D0276634E10011D79A /* MainController.swift */; };
+		D79261D4276634E10011D79A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D79261D2276634E10011D79A /* Main.storyboard */; };
+		D79261D6276634E20011D79A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D79261D5276634E20011D79A /* Assets.xcassets */; };
+		D79261D9276634E20011D79A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D79261D7276634E20011D79A /* LaunchScreen.storyboard */; };
+		D79261E227687A830011D79A /* CpuParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261E127687A830011D79A /* CpuParticle.swift */; };
+		D79261E427687AAC0011D79A /* XError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261E327687AAC0011D79A /* XError.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D77C22B0276C22C500AFD4CE /* MetalBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalBuffer.swift; sourceTree = "<group>"; };
+		D77C22B2276C231900AFD4CE /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		D77C22B4276C240C00AFD4CE /* PLYFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLYFile.swift; sourceTree = "<group>"; };
+		D79261C6276634E10011D79A /* LIDAR Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LIDAR Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D79261C9276634E10011D79A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D79261CB276634E10011D79A /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		D79261CD276634E10011D79A /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		D79261CE276634E10011D79A /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		D79261D0276634E10011D79A /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		D79261D3276634E10011D79A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D79261D5276634E20011D79A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D79261D8276634E20011D79A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D79261DA276634E20011D79A /* LIDAR_Scanner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LIDAR_Scanner-Bridging-Header.h"; sourceTree = "<group>"; };
+		D79261E027670BBD0011D79A /* LIDAR Scanner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LIDAR Scanner-Info.plist"; path = "../LIDAR Scanner-Info.plist"; sourceTree = "<group>"; };
+		D79261E127687A830011D79A /* CpuParticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuParticle.swift; sourceTree = "<group>"; };
+		D79261E327687AAC0011D79A /* XError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XError.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D79261C3276634E10011D79A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D79261BD276634E10011D79A = {
+			isa = PBXGroup;
+			children = (
+				D79261C8276634E10011D79A /* LIDAR Scanner */,
+				D79261C7276634E10011D79A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D79261C7276634E10011D79A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D79261C6276634E10011D79A /* LIDAR Scanner.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D79261C8276634E10011D79A /* LIDAR Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				D79261E027670BBD0011D79A /* LIDAR Scanner-Info.plist */,
+				D79261D7276634E20011D79A /* LaunchScreen.storyboard */,
+				D79261D2276634E10011D79A /* Main.storyboard */,
+				D79261C9276634E10011D79A /* AppDelegate.swift */,
+				D79261D0276634E10011D79A /* MainController.swift */,
+				D79261CE276634E10011D79A /* Renderer.swift */,
+				D79261E127687A830011D79A /* CpuParticle.swift */,
+				D79261E327687AAC0011D79A /* XError.swift */,
+				D77C22B0276C22C500AFD4CE /* MetalBuffer.swift */,
+				D77C22B2276C231900AFD4CE /* Helpers.swift */,
+				D77C22B4276C240C00AFD4CE /* PLYFile.swift */,
+				D79261CB276634E10011D79A /* Shaders.metal */,
+				D79261CD276634E10011D79A /* ShaderTypes.h */,
+				D79261D5276634E20011D79A /* Assets.xcassets */,
+				D79261DA276634E20011D79A /* LIDAR_Scanner-Bridging-Header.h */,
+			);
+			path = "LIDAR Scanner";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D79261C5276634E10011D79A /* LIDAR Scanner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D79261DD276634E20011D79A /* Build configuration list for PBXNativeTarget "LIDAR Scanner" */;
+			buildPhases = (
+				D79261C2276634E10011D79A /* Sources */,
+				D79261C3276634E10011D79A /* Frameworks */,
+				D79261C4276634E10011D79A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LIDAR Scanner";
+			productName = "LIDAR Scanner";
+			productReference = D79261C6276634E10011D79A /* LIDAR Scanner.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D79261BE276634E10011D79A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					D79261C5276634E10011D79A = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = D79261C1276634E10011D79A /* Build configuration list for PBXProject "LIDAR Scanner" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D79261BD276634E10011D79A;
+			productRefGroup = D79261C7276634E10011D79A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D79261C5276634E10011D79A /* LIDAR Scanner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D79261C4276634E10011D79A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D79261D9276634E20011D79A /* LaunchScreen.storyboard in Resources */,
+				D79261D6276634E20011D79A /* Assets.xcassets in Resources */,
+				D79261D4276634E10011D79A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D79261C2276634E10011D79A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D79261E227687A830011D79A /* CpuParticle.swift in Sources */,
+				D79261E427687AAC0011D79A /* XError.swift in Sources */,
+				D79261CC276634E10011D79A /* Shaders.metal in Sources */,
+				D77C22B3276C231900AFD4CE /* Helpers.swift in Sources */,
+				D79261CF276634E10011D79A /* Renderer.swift in Sources */,
+				D79261D1276634E10011D79A /* MainController.swift in Sources */,
+				D77C22B1276C22C500AFD4CE /* MetalBuffer.swift in Sources */,
+				D77C22B5276C240C00AFD4CE /* PLYFile.swift in Sources */,
+				D79261CA276634E10011D79A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D79261D2276634E10011D79A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D79261D3276634E10011D79A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D79261D7276634E20011D79A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D79261D8276634E20011D79A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D79261DB276634E20011D79A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D79261DC276634E20011D79A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D79261DE276634E20011D79A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FG9BHXZ9F6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "LIDAR Scanner-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "arkit metal";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "iScan2BIM.LIDAR-Scanner";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LIDAR Scanner/LIDAR_Scanner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D79261DF276634E20011D79A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FG9BHXZ9F6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "LIDAR Scanner-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "arkit metal";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "iScan2BIM.LIDAR-Scanner";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LIDAR Scanner/LIDAR_Scanner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D79261C1276634E10011D79A /* Build configuration list for PBXProject "LIDAR Scanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D79261DB276634E20011D79A /* Debug */,
+				D79261DC276634E20011D79A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D79261DD276634E20011D79A /* Build configuration list for PBXNativeTarget "LIDAR Scanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D79261DE276634E20011D79A /* Debug */,
+				D79261DF276634E20011D79A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D79261BE276634E10011D79A /* Project object */;
+}
