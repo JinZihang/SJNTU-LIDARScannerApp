@@ -151,8 +151,9 @@ final class MainController: UIViewController, ARSessionDelegate {
             renderer.clearParticles()
             
         case saveButton:
-            // Show the download menu
-            break
+            renderer.isInViewSceneMode = true
+            toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
+            goToSaveView()
         
         case supportButton:
             renderer.isInViewSceneMode = true
@@ -226,7 +227,47 @@ extension MainController: MTKViewDelegate {
 // MARK: - Added controller functionality
 
 extension MainController {
+    func goToSaveView() {
+        let saveController = SaveController()
+        saveController.mainController = self
+        present(saveController, animated: true, completion: nil)
+    }
     
+    func displayErrorMessage(error: XError) -> Void {
+        var title: String
+        switch error {
+            case .alreadySavingFile: title = "Saving in progress, please wait."
+            case .noScanDone: title = "No scan data to save."
+            case.savingFailed: title = "Saving failed."
+        }
+        
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
+        let when = DispatchTime.now() + 1.75
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+    func onSaveError(error: XError) {
+        displayErrorMessage(error: error)
+        renderer.savingError = nil
+    }
+    func export(url: URL) -> Void {
+        present(
+            UIActivityViewController(
+                activityItems: [url as Any],
+                applicationActivities: .none),
+            animated: true)
+    }
+    func afterSave() -> Void {
+        let err = renderer.savingError
+        if err == nil {
+            return export(url: renderer.savedCloudURLs.last!)
+        }
+        try? FileManager.default.removeItem(at: renderer.savedCloudURLs.last!)
+        renderer.savedCloudURLs.removeLast()
+        onSaveError(error: err!)
+    }
 }
 
 // MARK: - RenderDestinationProvider
