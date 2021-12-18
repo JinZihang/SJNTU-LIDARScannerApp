@@ -79,6 +79,8 @@
 				D79261D2276634E10011D79A /* Main.storyboard */,
 				D79261C9276634E10011D79A /* AppDelegate.swift */,
 				D79261D0276634E10011D79A /* MainController.swift */,
+				D78221DB276DE0D800818FD9 /* SaveController.swift */,
+				D78221DD276DE0E300818FD9 /* ExportController.swift */,
 				D79261CE276634E10011D79A /* Renderer.swift */,
 				D79261E127687A830011D79A /* CpuParticle.swift */,
 				D79261E327687AAC0011D79A /* XError.swift */,
@@ -89,8 +91,6 @@
 				D79261CD276634E10011D79A /* ShaderTypes.h */,
 				D79261D5276634E20011D79A /* Assets.xcassets */,
 				D79261DA276634E20011D79A /* LIDAR_Scanner-Bridging-Header.h */,
-				D78221DB276DE0D800818FD9 /* SaveController.swift */,
-				D78221DD276DE0E300818FD9 /* ExportController.swift */,
 			);
 			path = "LIDAR Scanner";
 			sourceTree = "<group>";
