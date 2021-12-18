@@ -28,7 +28,7 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         mainController.renderer.loadSavedClouds()
         exportData = mainController.renderer.savedCloudURLs
         
-        scanCountLabel.text = "\(exportData.count) Scans Found"
+        scanCountLabel.text = "\(exportData.count) Previous Scans Found"
         scanCountLabel.translatesAutoresizingMaskIntoConstraints = false
         scanCountLabel.textColor = .label
         view.addSubview(scanCountLabel)
