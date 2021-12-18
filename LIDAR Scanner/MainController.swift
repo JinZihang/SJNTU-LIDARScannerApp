@@ -48,8 +48,8 @@ final class MainController: UIViewController, ARSessionDelegate {
         }
         
         // Add buttons to the view
-        toggleScanButton = createButton(mainView: self, iconName: "livephoto", tintColor: .white)
-        view.addSubview(toggleScanButton)
+        supportButton = createButton(mainView: self, iconName: "questionmark.circle", tintColor: .white)
+        view.addSubview(supportButton)
         
         toggleCameraViewButton = createButton(mainView: self, iconName: "eye", tintColor: .white)
         view.addSubview(toggleCameraViewButton)
@@ -57,20 +57,20 @@ final class MainController: UIViewController, ARSessionDelegate {
         toggleParticlesButton = createButton(mainView: self, iconName: "circle.grid.hex.fill", tintColor: .white)
         view.addSubview(toggleParticlesButton)
         
+        toggleScanButton = createButton(mainView: self, iconName: "livephoto", tintColor: .white)
+        view.addSubview(toggleScanButton)
+        
         clearButton = createButton(mainView: self, iconName: "trash", tintColor: .white)
         view.addSubview(clearButton)
         
         saveButton = createButton(mainView: self, iconName: "square.and.arrow.down", tintColor: .white)
         view.addSubview(saveButton)
         
-        supportButton = createButton(mainView: self, iconName: "questionmark.circle", tintColor: .white)
-        view.addSubview(supportButton)
-        
         NSLayoutConstraint.activate([
-            toggleScanButton.widthAnchor.constraint(equalToConstant: 40),
-            toggleScanButton.heightAnchor.constraint(equalToConstant: 40),
-            toggleScanButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            toggleScanButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            supportButton.widthAnchor.constraint(equalToConstant: 40),
+            supportButton.heightAnchor.constraint(equalToConstant: 40),
+            supportButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+            supportButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             
             toggleCameraViewButton.widthAnchor.constraint(equalToConstant: 40),
             toggleCameraViewButton.heightAnchor.constraint(equalToConstant: 32),
@@ -82,6 +82,11 @@ final class MainController: UIViewController, ARSessionDelegate {
             toggleParticlesButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
             toggleParticlesButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
+            toggleScanButton.widthAnchor.constraint(equalToConstant: 40),
+            toggleScanButton.heightAnchor.constraint(equalToConstant: 40),
+            toggleScanButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            toggleScanButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            
             clearButton.widthAnchor.constraint(equalToConstant: 40),
             clearButton.heightAnchor.constraint(equalToConstant: 40),
             clearButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -105),
@@ -91,11 +96,6 @@ final class MainController: UIViewController, ARSessionDelegate {
             saveButton.heightAnchor.constraint(equalToConstant: 40),
             saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
             saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
-            
-            supportButton.widthAnchor.constraint(equalToConstant: 40),
-            supportButton.heightAnchor.constraint(equalToConstant: 40),
-            supportButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-            supportButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
         ])
     }
     
