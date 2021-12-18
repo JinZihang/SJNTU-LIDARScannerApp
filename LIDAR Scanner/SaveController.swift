@@ -16,10 +16,10 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     private var formatData: [String] = ["Ascii", "Binary Little Endian", "Binary Big Endian"]
     private let formatPicker = UIPickerView()
     private var selectedFormat: String?
-    private var saveFileButton = UIButton(type: .system)
+    private let saveFileButton = UIButton(type: .system)
     private let spinner = UIActivityIndicatorView(style: .large)
-    private var goToAllScansViewButton = UIButton(type: .system)
-    private var goToMainViewButton = UIButton(type: .system)
+    private let goToAllScansViewButton = UIButton(type: .system)
+    private let goToMainViewButton = UIButton(type: .system)
     
     var mainController: MainController!
     
