@@ -158,7 +158,7 @@ final class MainController: UIViewController, ARSessionDelegate {
         case supportButton:
             renderer.isInViewSceneMode = true
             toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
-            // Show the support pop-up
+            goToHelpView()
             
         default:
             break
@@ -236,6 +236,11 @@ extension MainController {
         let allScansController = AllScansController()
         allScansController.mainController = self
         present(allScansController, animated: true, completion: nil)
+    }
+    func goToHelpView() {
+        let helpsController = HelpsController()
+        helpsController.mainController = self
+        present(helpsController, animated: true, completion: nil)
     }
     
     func displayErrorMessage(error: XError) -> Void {
