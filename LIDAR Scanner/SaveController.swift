@@ -16,9 +16,10 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     private var formatData: [String] = ["Ascii", "Binary Little Endian", "Binary Big Endian"]
     private let formatPicker = UIPickerView()
     private var selectedFormat: String?
-    private let saveFileButton = UIButton(type: .system)
+    private var saveFileButton = UIButton(type: .system)
     private let spinner = UIActivityIndicatorView(style: .large)
-    private let goToMainViewButton = UIButton(type: .system)
+    private var goToAllScansViewButton = UIButton(type: .system)
+    private var goToMainViewButton = UIButton(type: .system)
     
     var mainController: MainController!
     
@@ -59,6 +60,12 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         spinner.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(spinner)
         
+        goToAllScansViewButton.translatesAutoresizingMaskIntoConstraints = false
+        goToAllScansViewButton.setBackgroundImage(.init(systemName: "text.justify"), for: .normal)
+        goToAllScansViewButton.tintColor = .label
+        goToAllScansViewButton.addTarget(self, action: #selector(goToAllScansView), for: .touchUpInside)
+        view.addSubview(goToAllScansViewButton)
+        
         goToMainViewButton.translatesAutoresizingMaskIntoConstraints = false
         goToMainViewButton.setBackgroundImage(.init(systemName: "arrow.turn.down.left"), for: .normal)
         goToMainViewButton.tintColor = .label
@@ -83,6 +90,11 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             saveFileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveFileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
+            goToAllScansViewButton.widthAnchor.constraint(equalToConstant: 40),
+            goToAllScansViewButton.heightAnchor.constraint(equalToConstant: 40),
+            goToAllScansViewButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant:  40),
+            goToAllScansViewButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            
             goToMainViewButton.widthAnchor.constraint(equalToConstant: 40),
             goToMainViewButton.heightAnchor.constraint(equalToConstant: 40),
             goToMainViewButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
@@ -103,12 +115,13 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? { return formatData[row] }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) { selectedFormat = formatData[row] }
     
+    func dismissModal() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     private func beforeSave() {
         saveFileButton.isEnabled = false
         isModalInPresentation = true
-    }
-    func dismissModal() {
-        self.dismiss(animated: true, completion: nil)
     }
     func onSaveError(error: XError) {
         dismissModal()
@@ -131,6 +144,10 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @objc func goToMainView() {
         dismissModal()
+    }
+    @objc func goToAllScansView() {
+        dismissModal()
+        mainController.goToAllScansView()
     }
 }
 

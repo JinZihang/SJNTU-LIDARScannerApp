@@ -232,6 +232,11 @@ extension MainController {
         saveController.mainController = self
         present(saveController, animated: true, completion: nil)
     }
+    func goToAllScansView() {
+        let allScansController = AllScansController()
+        allScansController.mainController = self
+        present(allScansController, animated: true, completion: nil)
+    }
     
     func displayErrorMessage(error: XError) -> Void {
         var title: String
