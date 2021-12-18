@@ -11,7 +11,6 @@
 		D77C22B3276C231900AFD4CE /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C22B2276C231900AFD4CE /* Helpers.swift */; };
 		D77C22B5276C240C00AFD4CE /* PLYFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C22B4276C240C00AFD4CE /* PLYFile.swift */; };
 		D78221DC276DE0D800818FD9 /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78221DB276DE0D800818FD9 /* SaveController.swift */; };
-		D78221DE276DE0E300818FD9 /* ExportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78221DD276DE0E300818FD9 /* ExportController.swift */; };
 		D79261CA276634E10011D79A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261C9276634E10011D79A /* AppDelegate.swift */; };
 		D79261CC276634E10011D79A /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D79261CB276634E10011D79A /* Shaders.metal */; };
 		D79261CF276634E10011D79A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261CE276634E10011D79A /* Renderer.swift */; };
@@ -28,7 +27,6 @@
 		D77C22B2276C231900AFD4CE /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D77C22B4276C240C00AFD4CE /* PLYFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLYFile.swift; sourceTree = "<group>"; };
 		D78221DB276DE0D800818FD9 /* SaveController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
-		D78221DD276DE0E300818FD9 /* ExportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportController.swift; sourceTree = "<group>"; };
 		D79261C6276634E10011D79A /* LIDAR Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LIDAR Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D79261C9276634E10011D79A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D79261CB276634E10011D79A /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
@@ -80,7 +78,6 @@
 				D79261C9276634E10011D79A /* AppDelegate.swift */,
 				D79261D0276634E10011D79A /* MainController.swift */,
 				D78221DB276DE0D800818FD9 /* SaveController.swift */,
-				D78221DD276DE0E300818FD9 /* ExportController.swift */,
 				D79261CE276634E10011D79A /* Renderer.swift */,
 				D79261E127687A830011D79A /* CpuParticle.swift */,
 				D79261E327687AAC0011D79A /* XError.swift */,
@@ -166,7 +163,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D78221DE276DE0E300818FD9 /* ExportController.swift in Sources */,
 				D78221DC276DE0D800818FD9 /* SaveController.swift in Sources */,
 				D79261E227687A830011D79A /* CpuParticle.swift in Sources */,
 				D79261E427687AAC0011D79A /* XError.swift in Sources */,
