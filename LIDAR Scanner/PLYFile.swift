@@ -32,7 +32,7 @@ final class PLYFile {
         let documentsDirectory = FileManager.default.urls(
             for: .documentDirectory, in: .userDomainMask)[0]
         let plyFile = documentsDirectory.appendingPathComponent(
-            "\(fileName)_\(Date().description(with: .current)).ply", isDirectory: false)
+            "\(fileName).ply", isDirectory: false)
         FileManager.default.createFile(atPath: plyFile.path, contents: nil, attributes: nil)
         
         var headersString = ""
