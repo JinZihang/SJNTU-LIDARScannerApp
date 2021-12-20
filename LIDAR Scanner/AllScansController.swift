@@ -11,13 +11,13 @@ import SwiftUI
 class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     private var exportData = [URL]()
     
-    private let scanCountLabel = UILabel()
+    private var scanCountLabel = UILabel()
     private let allScansPicker = UIPickerView()
     private var selectedScanIndex : Int?
     private var selectedScan: URL?
-    private let deleteFileButton = UIButton(type: .system)
-    private let saveFileButton = UIButton(type: .system)
-    private let goToSaveViewButton = UIButton(type: .system)
+    private var deleteFileButton = UIButton(type: .system)
+    private var saveFileButton = UIButton(type: .system)
+    private var goToSaveViewButton = UIButton(type: .system)
     
     var mainController: MainController!
     
@@ -28,9 +28,7 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         mainController.renderer.loadSavedClouds()
         exportData = mainController.renderer.savedCloudURLs
         
-        scanCountLabel.text = "\(exportData.count) Previous Scans Found"
-        scanCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        scanCountLabel.textColor = .label
+        scanCountLabel = createLable(text: "\(exportData.count) Previous Scans Found")
         view.addSubview(scanCountLabel)
         
         allScansPicker.delegate = self
@@ -41,22 +39,13 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         view.addSubview(allScansPicker)
         
-        deleteFileButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteFileButton.setBackgroundImage(.init(systemName: "trash"), for: .normal)
-        deleteFileButton.tintColor = .label
-        deleteFileButton.addTarget(self, action: #selector(executeDelete), for: .touchUpInside)
+        deleteFileButton = createAllScansViewButton(iconName: "trash")
         view.addSubview(deleteFileButton)
         
-        saveFileButton.translatesAutoresizingMaskIntoConstraints = false
-        saveFileButton.setBackgroundImage(.init(systemName: "square.and.arrow.down"), for: .normal)
-        saveFileButton.tintColor = .label
-        saveFileButton.addTarget(self, action: #selector(executeSave), for: .touchUpInside)
+        saveFileButton = createAllScansViewButton(iconName: "square.and.arrow.down")
         view.addSubview(saveFileButton)
         
-        goToSaveViewButton.translatesAutoresizingMaskIntoConstraints = false
-        goToSaveViewButton.setBackgroundImage(.init(systemName: "arrow.turn.down.left"), for: .normal)
-        goToSaveViewButton.tintColor = .label
-        goToSaveViewButton.addTarget(self, action: #selector(goToSaveView), for: .touchUpInside)
+        goToSaveViewButton = createAllScansViewButton(iconName: "arrow.turn.down.left")
         view.addSubview(goToSaveViewButton)
         
         NSLayoutConstraint.activate([
@@ -89,6 +78,24 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         ])
     }
     
+    @objc
+    func viewValueChanged(view: UIView) {
+        switch view {
+        case deleteFileButton:
+            executeDelete()
+            
+        case saveFileButton:
+            executeSave()
+            
+        case goToSaveViewButton:
+            goToSaveView()
+            
+        default:
+            break
+        }
+    }
+    
+    // Picker delegate methods
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return exportData.count
@@ -138,5 +145,14 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         dismissModal()
         mainController.goToSaveView()
     }
+}
+
+func createAllScansViewButton(iconName: String) -> UIButton {
+    let button = UIButton(type: .system)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setBackgroundImage(.init(systemName: iconName), for: .normal)
+    button.tintColor = .label
+    button.addTarget(AllScansController.self(), action: #selector(AllScansController.viewValueChanged), for: .touchUpInside)
+    return button
 }
 

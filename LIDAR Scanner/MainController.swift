@@ -48,22 +48,22 @@ final class MainController: UIViewController, ARSessionDelegate {
         }
         
         // Add buttons to the view
-        supportButton = createButton(mainView: self, iconName: "questionmark.circle", tintColor: .white)
+        supportButton = createMainViewButton(iconName: "questionmark.circle")
         view.addSubview(supportButton)
         
-        toggleCameraViewButton = createButton(mainView: self, iconName: "eye", tintColor: .white)
+        toggleCameraViewButton = createMainViewButton(iconName: "eye")
         view.addSubview(toggleCameraViewButton)
         
-        toggleParticlesButton = createButton(mainView: self, iconName: "circle.grid.hex.fill", tintColor: .white)
+        toggleParticlesButton = createMainViewButton(iconName: "circle.grid.hex.fill")
         view.addSubview(toggleParticlesButton)
         
-        toggleScanButton = createButton(mainView: self, iconName: "livephoto", tintColor: .white)
+        toggleScanButton = createMainViewButton(iconName: "livephoto")
         view.addSubview(toggleScanButton)
         
-        clearButton = createButton(mainView: self, iconName: "trash", tintColor: .white)
+        clearButton = createMainViewButton(iconName: "trash")
         view.addSubview(clearButton)
         
-        saveButton = createButton(mainView: self, iconName: "square.and.arrow.down", tintColor: .white)
+        saveButton = createMainViewButton(iconName: "square.and.arrow.down")
         view.addSubview(saveButton)
         
         NSLayoutConstraint.activate([
@@ -290,12 +290,12 @@ protocol RenderDestinationProvider {
     var sampleCount: Int { get set }
 }
 
-func createButton(mainView: MainController, iconName: String, tintColor: UIColor) -> UIButton {
+func createMainViewButton(iconName: String) -> UIButton {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setBackgroundImage(.init(systemName: iconName), for: .normal)
-    button.tintColor = tintColor
-    button.addTarget(mainView, action: #selector(mainView.viewValueChanged), for: .touchUpInside)
+    button.tintColor = .label
+    button.addTarget(MainController.self(), action: #selector(MainController.viewValueChanged), for: .touchUpInside)
     return button
 }
 func createImage(iconName: String) -> UIImageView {

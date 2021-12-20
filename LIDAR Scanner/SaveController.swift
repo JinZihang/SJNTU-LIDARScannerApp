@@ -11,15 +11,15 @@ import SwiftUI
 class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     private var exportData = [URL]()
     
-    private let particlesCountLabel = UILabel()
+    private var particlesCountLabel = UILabel()
     private let fileNameInput = UITextField()
     private var formatData: [String] = ["Ascii", "Binary Little Endian", "Binary Big Endian"]
     private let formatPicker = UIPickerView()
     private var selectedFormat: String?
-    private let saveFileButton = UIButton(type: .system)
+    private var saveFileButton = UIButton(type: .system)
     private let spinner = UIActivityIndicatorView(style: .large)
-    private let goToAllScansViewButton = UIButton(type: .system)
-    private let goToMainViewButton = UIButton(type: .system)
+    private var goToAllScansViewButton = UIButton(type: .system)
+    private var goToMainViewButton = UIButton(type: .system)
     
     var mainController: MainController!
     
@@ -27,9 +27,7 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        particlesCountLabel.text = "Scanned \(mainController.renderer.highConfCount) Points"
-        particlesCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        particlesCountLabel.textColor = .label
+        particlesCountLabel = createLable(text: "Scanned \(mainController.renderer.highConfCount) Points")
         view.addSubview(particlesCountLabel)
         
         fileNameInput.delegate = self
@@ -48,10 +46,7 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         formatPicker.delegate?.pickerView?(formatPicker, didSelectRow: 0, inComponent: 0)
         view.addSubview(formatPicker)
         
-        saveFileButton.translatesAutoresizingMaskIntoConstraints = false
-        saveFileButton.setBackgroundImage(.init(systemName: "square.and.arrow.down"), for: .normal)
-        saveFileButton.tintColor = .label
-        saveFileButton.addTarget(self, action: #selector(executeSave), for: .touchUpInside)
+        saveFileButton = createSaveViewButton(iconName: "square.and.arrow.down")
         view.addSubview(saveFileButton)
         
         spinner.color = .white
@@ -60,16 +55,10 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         spinner.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(spinner)
         
-        goToAllScansViewButton.translatesAutoresizingMaskIntoConstraints = false
-        goToAllScansViewButton.setBackgroundImage(.init(systemName: "text.justify"), for: .normal)
-        goToAllScansViewButton.tintColor = .label
-        goToAllScansViewButton.addTarget(self, action: #selector(goToAllScansView), for: .touchUpInside)
+        goToAllScansViewButton = createSaveViewButton(iconName: "text.justify")
         view.addSubview(goToAllScansViewButton)
         
-        goToMainViewButton.translatesAutoresizingMaskIntoConstraints = false
-        goToMainViewButton.setBackgroundImage(.init(systemName: "arrow.turn.down.left"), for: .normal)
-        goToMainViewButton.tintColor = .label
-        goToMainViewButton.addTarget(self, action: #selector(goToMainView), for: .touchUpInside)
+        goToMainViewButton = createSaveViewButton(iconName: "arrow.turn.down.left")
         view.addSubview(goToMainViewButton)
         
         NSLayoutConstraint.activate([
@@ -100,6 +89,23 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             goToMainViewButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
             goToMainViewButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
         ])
+    }
+    
+    @objc
+    func viewValueChanged(view: UIView) {
+        switch view {
+        case saveFileButton:
+            executeSave()
+            
+        case goToAllScansViewButton:
+            goToAllScansView()
+            
+        case goToMainViewButton:
+            goToMainView()
+            
+        default:
+            break
+        }
     }
     
     // Text field delegate methods
@@ -149,5 +155,14 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         dismissModal()
         mainController.goToAllScansView()
     }
+}
+
+func createSaveViewButton(iconName: String) -> UIButton {
+    let button = UIButton(type: .system)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setBackgroundImage(.init(systemName: iconName), for: .normal)
+    button.tintColor = .label
+    button.addTarget(SaveController.self(), action: #selector(SaveController.viewValueChanged), for: .touchUpInside)
+    return button
 }
 
