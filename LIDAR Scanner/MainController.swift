@@ -294,7 +294,7 @@ func createMainViewButton(iconName: String) -> UIButton {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setBackgroundImage(.init(systemName: iconName), for: .normal)
-    button.tintColor = .label
+    button.tintColor = .white
     button.addTarget(MainController.self(), action: #selector(MainController.viewValueChanged), for: .touchUpInside)
     return button
 }
