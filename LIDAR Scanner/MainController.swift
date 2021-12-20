@@ -298,6 +298,20 @@ func createButton(mainView: MainController, iconName: String, tintColor: UIColor
     button.addTarget(mainView, action: #selector(mainView.viewValueChanged), for: .touchUpInside)
     return button
 }
+func createImage(iconName: String) -> UIImageView {
+    let image = UIImageView()
+    image.image = .init(systemName: iconName)
+    image.translatesAutoresizingMaskIntoConstraints = false
+    image.tintColor = .label
+    return image
+}
+func createLable(text: String) -> UILabel {
+    let label = UILabel()
+    label.text = text
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = .label
+    return label
+}
 
 extension MTKView: RenderDestinationProvider { }
 
