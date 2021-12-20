@@ -248,7 +248,7 @@ extension MainController {
         switch error {
             case .alreadySavingFile: title = "Saving in progress, please wait."
             case .noScanDone: title = "No scan data to save."
-            case.savingFailed: title = "Saving failed."
+            case .savingFailed: title = "Saving failed."
         }
         
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
