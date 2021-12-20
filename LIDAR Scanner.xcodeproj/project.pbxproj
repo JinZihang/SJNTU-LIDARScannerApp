@@ -31,6 +31,8 @@
 		D78221DB276DE0D800818FD9 /* SaveController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
 		D78221E3276DF7BA00818FD9 /* AllScansController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllScansController.swift; sourceTree = "<group>"; };
 		D78365E9276E275800814C71 /* HelpsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpsController.swift; sourceTree = "<group>"; };
+		D78E6C1E277060D8007AD96F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D78E6C24277063BA007AD96F /* LIDAR Scanner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "LIDAR Scanner-Info.plist"; sourceTree = SOURCE_ROOT; };
 		D79261C6276634E10011D79A /* LIDAR Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LIDAR Scanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D79261C9276634E10011D79A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D79261CB276634E10011D79A /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
@@ -41,7 +43,6 @@
 		D79261D5276634E20011D79A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D79261D8276634E20011D79A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D79261DA276634E20011D79A /* LIDAR_Scanner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LIDAR_Scanner-Bridging-Header.h"; sourceTree = "<group>"; };
-		D79261E027670BBD0011D79A /* LIDAR Scanner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LIDAR Scanner-Info.plist"; path = "../LIDAR Scanner-Info.plist"; sourceTree = "<group>"; };
 		D79261E127687A830011D79A /* CpuParticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuParticle.swift; sourceTree = "<group>"; };
 		D79261E327687AAC0011D79A /* XError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +61,7 @@
 		D79261BD276634E10011D79A = {
 			isa = PBXGroup;
 			children = (
+				D78E6C1E277060D8007AD96F /* README.md */,
 				D79261C8276634E10011D79A /* LIDAR Scanner */,
 				D79261C7276634E10011D79A /* Products */,
 			);
@@ -76,7 +78,7 @@
 		D79261C8276634E10011D79A /* LIDAR Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				D79261E027670BBD0011D79A /* LIDAR Scanner-Info.plist */,
+				D78E6C24277063BA007AD96F /* LIDAR Scanner-Info.plist */,
 				D79261D7276634E20011D79A /* LaunchScreen.storyboard */,
 				D79261D2276634E10011D79A /* Main.storyboard */,
 				D79261C9276634E10011D79A /* AppDelegate.swift */,
@@ -157,8 +159,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D79261D9276634E20011D79A /* LaunchScreen.storyboard in Resources */,
-				D79261D6276634E20011D79A /* Assets.xcassets in Resources */,
 				D79261D4276634E10011D79A /* Main.storyboard in Resources */,
+				D79261D6276634E20011D79A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +343,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationLandscapeRight;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -375,7 +377,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationLandscapeRight;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

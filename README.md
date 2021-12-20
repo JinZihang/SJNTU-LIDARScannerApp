@@ -10,3 +10,4 @@
 3. Scan and store point cloud.
 4. Abandon the current scan.
 5. Export the point cloud data in the PLY format.
+
