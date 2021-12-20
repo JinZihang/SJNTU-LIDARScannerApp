@@ -33,7 +33,7 @@ class HelpsController : UIViewController {
         view.backgroundColor = .systemBackground
         
         helpsTitleLable = createLable(text: "Help")
-        helpsTitleLable.font = .boldSystemFont(ofSize: 20)
+        helpsTitleLable.font = .boldSystemFont(ofSize: 22)
         view.addSubview(helpsTitleLable)
         
         toggleCameraImage = createImage(iconName: "eye")
@@ -83,52 +83,52 @@ class HelpsController : UIViewController {
             
             toggleCameraImage.widthAnchor.constraint(equalToConstant: 40),
             toggleCameraImage.heightAnchor.constraint(equalToConstant: 32),
-            toggleCameraImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -200),
-            toggleCameraImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            toggleCameraLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            toggleCameraLable.topAnchor.constraint(equalTo: view.topAnchor, constant: 66),
+            toggleCameraImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -260),
+            toggleCameraImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -95),
+            toggleCameraLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -130),
+            toggleCameraLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -95),
             
             toggleParticlesImage.widthAnchor.constraint(equalToConstant: 40),
             toggleParticlesImage.heightAnchor.constraint(equalToConstant: 40),
-            toggleParticlesImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -200),
-            toggleParticlesImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            toggleParticlesLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            toggleParticlesLable.topAnchor.constraint(equalTo: view.topAnchor, constant: 110),
+            toggleParticlesImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -260),
+            toggleParticlesImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -35),
+            toggleParticlesLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -125),
+            toggleParticlesLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -35),
             
             toggleScanImage.widthAnchor.constraint(equalToConstant: 40),
             toggleScanImage.heightAnchor.constraint(equalToConstant: 40),
-            toggleScanImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -200),
-            toggleScanImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            toggleScanLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            toggleScanLable.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
+            toggleScanImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -260),
+            toggleScanImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 25),
+            toggleScanLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -110),
+            toggleScanLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 25),
             
             clearParticlesImage.widthAnchor.constraint(equalToConstant: 40),
             clearParticlesImage.heightAnchor.constraint(equalToConstant: 40),
-            clearParticlesImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -200),
-            clearParticlesImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
-            clearParticlesLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            clearParticlesLable.topAnchor.constraint(equalTo: view.topAnchor, constant: 210),
+            clearParticlesImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -260),
+            clearParticlesImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 85),
+            clearParticlesLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -150),
+            clearParticlesLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 85),
             
             saveFileImage.widthAnchor.constraint(equalToConstant: 40),
             saveFileImage.heightAnchor.constraint(equalToConstant: 40),
-            saveFileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -200),
-            saveFileImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 250),
-            saveFileLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveFileLable.topAnchor.constraint(equalTo: view.topAnchor, constant: 260),
+            saveFileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 70),
+            saveFileImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -95),
+            saveFileLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 217),
+            saveFileLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -95),
             
             goToAllScansViewImage.widthAnchor.constraint(equalToConstant: 40),
             goToAllScansViewImage.heightAnchor.constraint(equalToConstant: 40),
-            goToAllScansViewImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -200),
-            goToAllScansViewImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
-            goToAllScansViewLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            goToAllScansViewLable.topAnchor.constraint(equalTo: view.topAnchor, constant: 310),
+            goToAllScansViewImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 70),
+            goToAllScansViewImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -35),
+            goToAllScansViewLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 200),
+            goToAllScansViewLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -35),
             
             goToPreviousViewImage.widthAnchor.constraint(equalToConstant: 40),
             goToPreviousViewImage.heightAnchor.constraint(equalToConstant: 40),
-            goToPreviousViewImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -200),
-            goToPreviousViewImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 350),
-            goToPreviousViewLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            goToPreviousViewLable.topAnchor.constraint(equalTo: view.topAnchor, constant: 360),
+            goToPreviousViewImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 70),
+            goToPreviousViewImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 25),
+            goToPreviousViewLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 198),
+            goToPreviousViewLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 25),
             
             goToMainViewButton.widthAnchor.constraint(equalToConstant: 40),
             goToMainViewButton.heightAnchor.constraint(equalToConstant: 40),
