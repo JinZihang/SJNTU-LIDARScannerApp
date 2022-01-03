@@ -79,6 +79,9 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             saveFileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveFileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
             goToAllScansViewButton.widthAnchor.constraint(equalToConstant: 40),
             goToAllScansViewButton.heightAnchor.constraint(equalToConstant: 40),
             goToAllScansViewButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant:  40),
