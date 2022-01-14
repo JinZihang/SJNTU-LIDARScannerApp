@@ -28,7 +28,7 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         mainController.renderer.loadSavedClouds()
         exportData = mainController.renderer.savedCloudURLs
         
-        scanCountLabel = createLable(text: "\(exportData.count) Previous Scans Found")
+        scanCountLabel = exportData.count < 2 ? createLable(text: "\(exportData.count) Previous Scan Found") : createLable(text: "\(exportData.count) Previous Scans Found")
         view.addSubview(scanCountLabel)
         
         allScansPicker.delegate = self
@@ -129,7 +129,12 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
             allScansPicker.delegate?.pickerView?(allScansPicker, didSelectRow: selectedScanIndex!, inComponent: 0)
         }
         
-        scanCountLabel.text = "\(exportData.count) Scans Found"
+        if (exportData.count < 2) {
+            scanCountLabel.text = "\(exportData.count) Previous Scan Found"
+        } else {
+            scanCountLabel.text = "\(exportData.count) Previous Scans Found"
+        }
+        
     }
     func onSaveError(error: XError) {
         dismissModal()

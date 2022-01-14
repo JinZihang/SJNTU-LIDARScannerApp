@@ -59,7 +59,7 @@ class SaveController: UIViewController, UITextFieldDelegate {
             fileNameInput.widthAnchor.constraint(equalToConstant: 300),
             fileNameInput.heightAnchor.constraint(equalToConstant: 45),
             fileNameInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            fileNameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -5),
+            fileNameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             saveFileButton.widthAnchor.constraint(equalToConstant: 40),
             saveFileButton.heightAnchor.constraint(equalToConstant: 40),
