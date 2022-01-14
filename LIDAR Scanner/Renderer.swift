@@ -295,8 +295,7 @@ extension Renderer {
     func saveAsPlyFile(fileName: String,
                        beforeGlobalThread: [() -> Void],
                        afterGlobalThread: [() -> Void],
-                       errorCallback: (XError) -> Void,
-                       format: String) {
+                       errorCallback: (XError) -> Void) {
         
         guard !isSavingFile else {
             return errorCallback(XError.alreadySavingFile)
@@ -314,8 +313,7 @@ extension Renderer {
             do { self.savedCloudURLs.append(try PLYFile.write(
                     fileName: fileName,
                     cpuParticlesBuffer: &self.cpuParticlesBuffer,
-                    highConfCount: self.highConfCount,
-                    format: format)) } catch {
+                    highConfCount: self.highConfCount)) } catch {
                 self.savingError = XError.savingFailed
             }
     

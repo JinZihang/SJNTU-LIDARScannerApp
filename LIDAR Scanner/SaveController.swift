@@ -8,14 +8,11 @@
 import Foundation
 import SwiftUI
 
-class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class SaveController: UIViewController, UITextFieldDelegate {
     private var exportData = [URL]()
     
     private var particlesCountLabel = UILabel()
     private let fileNameInput = UITextField()
-    private var formatData: [String] = ["Ascii", "Binary Little Endian", "Binary Big Endian"]
-    private let formatPicker = UIPickerView()
-    private var selectedFormat: String?
     private var saveFileButton = UIButton(type: .system)
     private let spinner = UIActivityIndicatorView(style: .large)
     private var goToAllScansViewButton = UIButton(type: .system)
@@ -40,12 +37,6 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         fileNameInput.backgroundColor = .systemBackground
         view.addSubview(fileNameInput)
         
-        formatPicker.delegate = self
-        formatPicker.dataSource = self
-        formatPicker.translatesAutoresizingMaskIntoConstraints =  false
-        formatPicker.delegate?.pickerView?(formatPicker, didSelectRow: 0, inComponent: 0)
-        view.addSubview(formatPicker)
-        
         saveFileButton = createSaveViewButton(iconName: "square.and.arrow.down")
         view.addSubview(saveFileButton)
         
@@ -68,11 +59,7 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             fileNameInput.widthAnchor.constraint(equalToConstant: 300),
             fileNameInput.heightAnchor.constraint(equalToConstant: 45),
             fileNameInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            fileNameInput.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            
-            formatPicker.heightAnchor.constraint(equalToConstant: 230),
-            formatPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            formatPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            fileNameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             saveFileButton.widthAnchor.constraint(equalToConstant: 40),
             saveFileButton.heightAnchor.constraint(equalToConstant: 40),
@@ -118,12 +105,6 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return false
     }
     
-    // Picker delegate methods
-    func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return formatData.count }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? { return formatData[row] }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) { selectedFormat = formatData[row] }
-    
     func dismissModal() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -138,17 +119,12 @@ class SaveController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     @objc func executeSave() -> Void {
         let fileName = !fileNameInput.text!.isEmpty ? fileNameInput.text : "untitled"
-        let format = selectedFormat!
-            .lowercased(with: .none)
-            .split(separator: " ")
-            .joined(separator: "_")
         
         mainController.renderer.saveAsPlyFile(
             fileName: fileName!,
             beforeGlobalThread: [beforeSave, spinner.startAnimating],
             afterGlobalThread: [dismissModal, spinner.stopAnimating, mainController.afterSave],
-            errorCallback: onSaveError,
-            format: format)
+            errorCallback: onSaveError)
     }
     
     @objc func goToMainView() {
