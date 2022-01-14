@@ -20,8 +20,6 @@
 		D79261D4276634E10011D79A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D79261D2276634E10011D79A /* Main.storyboard */; };
 		D79261D6276634E20011D79A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D79261D5276634E20011D79A /* Assets.xcassets */; };
 		D79261D9276634E20011D79A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D79261D7276634E20011D79A /* LaunchScreen.storyboard */; };
-		D79261E227687A830011D79A /* CpuParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261E127687A830011D79A /* CpuParticle.swift */; };
-		D79261E427687AAC0011D79A /* XError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79261E327687AAC0011D79A /* XError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,8 +41,6 @@
 		D79261D5276634E20011D79A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D79261D8276634E20011D79A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D79261DA276634E20011D79A /* LIDAR_Scanner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LIDAR_Scanner-Bridging-Header.h"; sourceTree = "<group>"; };
-		D79261E127687A830011D79A /* CpuParticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuParticle.swift; sourceTree = "<group>"; };
-		D79261E327687AAC0011D79A /* XError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +83,7 @@
 				D78221DB276DE0D800818FD9 /* SaveController.swift */,
 				D78221E3276DF7BA00818FD9 /* AllScansController.swift */,
 				D78365E9276E275800814C71 /* HelpsController.swift */,
-				D79261E327687AAC0011D79A /* XError.swift */,
 				D77C22B2276C231900AFD4CE /* Helpers.swift */,
-				D79261E127687A830011D79A /* CpuParticle.swift */,
 				D77C22B4276C240C00AFD4CE /* PLYFile.swift */,
 				D79261CD276634E10011D79A /* ShaderTypes.h */,
 				D79261DA276634E20011D79A /* LIDAR_Scanner-Bridging-Header.h */,
@@ -172,8 +166,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D78221DC276DE0D800818FD9 /* SaveController.swift in Sources */,
-				D79261E227687A830011D79A /* CpuParticle.swift in Sources */,
-				D79261E427687AAC0011D79A /* XError.swift in Sources */,
 				D79261CC276634E10011D79A /* Shaders.metal in Sources */,
 				D78365EA276E275800814C71 /* HelpsController.swift in Sources */,
 				D77C22B3276C231900AFD4CE /* Helpers.swift in Sources */,
