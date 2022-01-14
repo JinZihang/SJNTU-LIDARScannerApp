@@ -63,7 +63,7 @@ final class MainController: UIViewController, ARSessionDelegate {
         clearButton = createMainViewButton(iconName: "trash")
         view.addSubview(clearButton)
         
-        saveButton = createMainViewButton(iconName: "square.and.arrow.down")
+        saveButton = createMainViewButton(iconName: "square.and.arrow.up")
         view.addSubview(saveButton)
         
         NSLayoutConstraint.activate([

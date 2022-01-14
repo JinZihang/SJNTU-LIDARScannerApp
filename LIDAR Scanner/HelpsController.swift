@@ -56,7 +56,7 @@ class HelpsController : UIViewController {
         clearParticlesLable = createLable(text: "Clear particles")
         view.addSubview(clearParticlesLable)
         
-        saveFileImage = createImage(iconName: "square.and.arrow.down")
+        saveFileImage = createImage(iconName: "square.and.arrow.up")
         view.addSubview(saveFileImage)
         saveFileLable = createLable(text: "Open save view/Save file")
         view.addSubview(saveFileLable)

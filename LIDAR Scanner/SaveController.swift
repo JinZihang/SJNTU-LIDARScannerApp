@@ -37,7 +37,7 @@ class SaveController: UIViewController, UITextFieldDelegate {
         fileNameInput.backgroundColor = .systemBackground
         view.addSubview(fileNameInput)
         
-        saveFileButton = createSaveViewButton(iconName: "square.and.arrow.down")
+        saveFileButton = createSaveViewButton(iconName: "square.and.arrow.up")
         view.addSubview(saveFileButton)
         
         spinner.color = .white
@@ -59,7 +59,7 @@ class SaveController: UIViewController, UITextFieldDelegate {
             fileNameInput.widthAnchor.constraint(equalToConstant: 300),
             fileNameInput.heightAnchor.constraint(equalToConstant: 45),
             fileNameInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            fileNameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            fileNameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -5),
             
             saveFileButton.widthAnchor.constraint(equalToConstant: 40),
             saveFileButton.heightAnchor.constraint(equalToConstant: 40),

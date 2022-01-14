@@ -42,7 +42,7 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         deleteFileButton = createAllScansViewButton(iconName: "trash")
         view.addSubview(deleteFileButton)
         
-        saveFileButton = createAllScansViewButton(iconName: "square.and.arrow.down")
+        saveFileButton = createAllScansViewButton(iconName: "square.and.arrow.up")
         view.addSubview(saveFileButton)
         
         goToSaveViewButton = createAllScansViewButton(iconName: "arrow.turn.down.left")
