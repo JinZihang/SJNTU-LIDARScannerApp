@@ -17,7 +17,7 @@ final class MainController: UIViewController, ARSessionDelegate {
     private var toggleCameraViewButton = UIButton(type: .system)
     private var toggleParticlesButton = UIButton(type: .system)
     private var clearButton = UIButton(type: .system)
-    private var exportButton = UIButton(type: .system)
+    private var exportPointCloudButton = UIButton(type: .system)
     private var supportButton = UIButton(type: .system)
     
     private let session = ARSession()
@@ -68,8 +68,8 @@ final class MainController: UIViewController, ARSessionDelegate {
         clearButton = createMainViewButton(iconName: "trash")
         view.addSubview(clearButton)
         
-        exportButton = createMainViewButton(iconName: "square.and.arrow.up")
-        view.addSubview(exportButton)
+        exportPointCloudButton = createMainViewButton(iconName: "square.and.arrow.up")
+        view.addSubview(exportPointCloudButton)
         
         supportButton = createMainViewButton(iconName: "questionmark.circle")
         view.addSubview(supportButton)
@@ -105,10 +105,10 @@ final class MainController: UIViewController, ARSessionDelegate {
             clearButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -105),
             clearButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
-            exportButton.widthAnchor.constraint(equalToConstant: 40),
-            exportButton.heightAnchor.constraint(equalToConstant: 40),
-            exportButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-            exportButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            exportPointCloudButton.widthAnchor.constraint(equalToConstant: 40),
+            exportPointCloudButton.heightAnchor.constraint(equalToConstant: 40),
+            exportPointCloudButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+            exportPointCloudButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
             supportButton.widthAnchor.constraint(equalToConstant: 40),
             supportButton.heightAnchor.constraint(equalToConstant: 40),
@@ -174,7 +174,7 @@ final class MainController: UIViewController, ARSessionDelegate {
             toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
             renderer.clearParticles()
             
-        case exportButton:
+        case exportPointCloudButton:
             renderer.isInViewSceneMode = true
             toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
             goToExportView()
@@ -296,10 +296,10 @@ extension MainController {
     func afterExport() -> Void {
         let err = renderer.savingError
         if err == nil {
-            return export(url: renderer.savedCloudURLs.last!)
+            return export(url: renderer.savedPointCloudsURLs.last!)
         }
-        try? FileManager.default.removeItem(at: renderer.savedCloudURLs.last!)
-        renderer.savedCloudURLs.removeLast()
+        try? FileManager.default.removeItem(at: renderer.savedPointCloudsURLs.last!)
+        renderer.savedPointCloudsURLs.removeLast()
         onExportError(error: err!)
     }
 }

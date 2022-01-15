@@ -24,8 +24,8 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        mainController.renderer.loadSavedClouds()
-        exportData = mainController.renderer.savedCloudURLs
+        mainController.renderer.loadSavedPointClouds()
+        exportData = mainController.renderer.savedPointCloudsURLs
         
         scanCountLabel = exportData.count < 2 ? createLable(text: "\(exportData.count) Previous Scan Found") : createLable(text: "\(exportData.count) Previous Scans Found")
         view.addSubview(scanCountLabel)
@@ -111,7 +111,7 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         guard selectedScan != nil else { return }
 
         try! FileManager.default.removeItem(at: selectedScan!)
-        mainController.renderer.savedCloudURLs.remove(at: selectedScanIndex!)
+        mainController.renderer.savedPointCloudsURLs.remove(at: selectedScanIndex!)
         exportData.remove(at: selectedScanIndex!)
         allScansPicker.reloadAllComponents()
         

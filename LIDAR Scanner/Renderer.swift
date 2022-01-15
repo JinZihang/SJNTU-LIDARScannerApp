@@ -12,7 +12,7 @@ import ARKit
 // MARK: - Core Metal Scan Renderer
 
 final class Renderer {
-    var savedCloudURLs = [URL]()
+    var savedPointCloudsURLs = [URL]()
     
     var showParticles = true
     var isInViewSceneMode = true
@@ -128,7 +128,7 @@ final class Renderer {
         depthStencilState = device.makeDepthStencilState(descriptor: depthStateDescriptor)!
         
         inFlightSemaphore = DispatchSemaphore(value: maxInFlightBuffers)
-        self.loadSavedClouds()
+        self.loadSavedPointClouds()
     }
     
     func drawRectResized(size: CGSize) {
@@ -310,7 +310,7 @@ extension Renderer {
                 for task in beforeGlobalThread { task() }
             }
 
-            do { self.savedCloudURLs.append(try PLYFile.write(
+            do { self.savedPointCloudsURLs.append(try PLYFile.write(
                     fileName: fileName,
                     cpuParticlesBuffer: &self.cpuParticlesBuffer,
                     highConfCount: self.highConfCount)) } catch {
@@ -340,10 +340,10 @@ extension Renderer {
         particlesBuffer = .init(device: device, count: maxPoints, index: kParticleUniforms.rawValue)
     }
     
-    func loadSavedClouds() {
+    func loadSavedPointClouds() {
         let docs = FileManager.default.urls(
             for: .documentDirectory, in: .userDomainMask)[0]
-        savedCloudURLs = try! FileManager.default.contentsOfDirectory(
+        savedPointCloudsURLs = try! FileManager.default.contentsOfDirectory(
             at: docs, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
     }
 }
