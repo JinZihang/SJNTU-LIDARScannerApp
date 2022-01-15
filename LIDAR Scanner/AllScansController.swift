@@ -56,11 +56,6 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
             allScansPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             allScansPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            exportButton.widthAnchor.constraint(equalToConstant: 40),
-            exportButton.heightAnchor.constraint(equalToConstant: 40),
-            exportButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            exportButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
-            
             deleteFileButton.widthAnchor.constraint(equalToConstant: 40),
             deleteFileButton.heightAnchor.constraint(equalToConstant: 40),
             deleteFileButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
