@@ -18,8 +18,8 @@ class HelpsController : UIViewController {
     private var toggleScanLable = UILabel()
     private var clearParticlesImage = UIImageView()
     private var clearParticlesLable = UILabel()
-    private var saveFileImage = UIImageView()
-    private var saveFileLable = UILabel()
+    private var exportImage = UIImageView()
+    private var exportLable = UILabel()
     private var goToAllScansViewImage = UIImageView()
     private var goToAllScansViewLable = UILabel()
     private var goToPreviousViewImage = UIImageView()
@@ -56,10 +56,10 @@ class HelpsController : UIViewController {
         clearParticlesLable = createLable(text: "Clear particles")
         view.addSubview(clearParticlesLable)
         
-        saveFileImage = createImage(iconName: "square.and.arrow.up")
-        view.addSubview(saveFileImage)
-        saveFileLable = createLable(text: "Open save view/Save file")
-        view.addSubview(saveFileLable)
+        exportImage = createImage(iconName: "square.and.arrow.up")
+        view.addSubview(exportImage)
+        exportLable = createLable(text: "Open export view/Export file")
+        view.addSubview(exportLable)
         
         goToAllScansViewImage = createImage(iconName: "text.justify")
         view.addSubview(goToAllScansViewImage)
@@ -109,12 +109,12 @@ class HelpsController : UIViewController {
             clearParticlesLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -150),
             clearParticlesLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 85),
             
-            saveFileImage.widthAnchor.constraint(equalToConstant: 40),
-            saveFileImage.heightAnchor.constraint(equalToConstant: 40),
-            saveFileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 70),
-            saveFileImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -95),
-            saveFileLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 217),
-            saveFileLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -95),
+            exportImage.widthAnchor.constraint(equalToConstant: 40),
+            exportImage.heightAnchor.constraint(equalToConstant: 40),
+            exportImage.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 70),
+            exportImage.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -95),
+            exportLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 217),
+            exportLable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -95),
             
             goToAllScansViewImage.widthAnchor.constraint(equalToConstant: 40),
             goToAllScansViewImage.heightAnchor.constraint(equalToConstant: 40),

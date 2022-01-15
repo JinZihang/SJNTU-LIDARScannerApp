@@ -16,8 +16,8 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
     private var selectedScanIndex : Int?
     private var selectedScan: URL?
     private var deleteFileButton = UIButton(type: .system)
-    private var saveFileButton = UIButton(type: .system)
-    private var goToSaveViewButton = UIButton(type: .system)
+    private var exportButton = UIButton(type: .system)
+    private var goToExportViewButton = UIButton(type: .system)
     
     var mainController: MainController!
     
@@ -42,11 +42,11 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         deleteFileButton = createAllScansViewButton(iconName: "trash")
         view.addSubview(deleteFileButton)
         
-        saveFileButton = createAllScansViewButton(iconName: "square.and.arrow.up")
-        view.addSubview(saveFileButton)
+        exportButton = createAllScansViewButton(iconName: "square.and.arrow.up")
+        view.addSubview(exportButton)
         
-        goToSaveViewButton = createAllScansViewButton(iconName: "arrow.turn.down.left")
-        view.addSubview(goToSaveViewButton)
+        goToExportViewButton = createAllScansViewButton(iconName: "arrow.turn.down.left")
+        view.addSubview(goToExportViewButton)
         
         NSLayoutConstraint.activate([
             scanCountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -56,25 +56,25 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
             allScansPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             allScansPicker.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            saveFileButton.widthAnchor.constraint(equalToConstant: 40),
-            saveFileButton.heightAnchor.constraint(equalToConstant: 40),
-            saveFileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveFileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            exportButton.widthAnchor.constraint(equalToConstant: 40),
+            exportButton.heightAnchor.constraint(equalToConstant: 40),
+            exportButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            exportButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
             deleteFileButton.widthAnchor.constraint(equalToConstant: 40),
             deleteFileButton.heightAnchor.constraint(equalToConstant: 40),
             deleteFileButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
             deleteFileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
-            saveFileButton.widthAnchor.constraint(equalToConstant: 40),
-            saveFileButton.heightAnchor.constraint(equalToConstant: 40),
-            saveFileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveFileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            exportButton.widthAnchor.constraint(equalToConstant: 40),
+            exportButton.heightAnchor.constraint(equalToConstant: 40),
+            exportButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            exportButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
-            goToSaveViewButton.widthAnchor.constraint(equalToConstant: 40),
-            goToSaveViewButton.heightAnchor.constraint(equalToConstant: 40),
-            goToSaveViewButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-            goToSaveViewButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            goToExportViewButton.widthAnchor.constraint(equalToConstant: 40),
+            goToExportViewButton.heightAnchor.constraint(equalToConstant: 40),
+            goToExportViewButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+            goToExportViewButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
         ])
     }
     
@@ -84,11 +84,11 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         case deleteFileButton:
             executeDelete()
             
-        case saveFileButton:
-            executeSave()
+        case exportButton:
+            executeExport()
             
-        case goToSaveViewButton:
-            goToSaveView()
+        case goToExportViewButton:
+            goToExportView()
             
         default:
             break
@@ -136,19 +136,19 @@ class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         
     }
-    func onSaveError(error: XError) {
+    func onExportError(error: XError) {
         dismissModal()
-        mainController.onSaveError(error: error)
+        mainController.onExportError(error: error)
     }
-    @objc func executeSave() {
+    @objc func executeExport() {
         guard selectedScan != nil else { return }
         dismissModal()
         mainController.export(url: selectedScan!)
     }
     
-    @objc func goToSaveView() {
+    @objc func goToExportView() {
         dismissModal()
-        mainController.goToSaveView()
+        mainController.goToExportView()
     }
 }
 

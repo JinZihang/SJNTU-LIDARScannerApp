@@ -9,9 +9,9 @@ import Foundation
 import ARKit
 
 enum XError : Error {
-    case savingFailed
     case noScanDone
-    case alreadySavingFile
+    case alreadyExporting
+    case exportingFailed
 }
 
 typealias Float2 = SIMD2<Float>

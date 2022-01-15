@@ -1,5 +1,5 @@
 //
-//  SaveController.swift
+//  ExportController.swift
 //  LIDAR Scanner
 //
 //  Created by Zihang Jin on 18/12/21.
@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-class SaveController: UIViewController, UITextFieldDelegate {
+class ExportController: UIViewController, UITextFieldDelegate {
     private var exportData = [URL]()
     
     private var particlesCountLabel = UILabel()
     private let fileNameInput = UITextField()
-    private var saveFileButton = UIButton(type: .system)
+    private var exportButton = UIButton(type: .system)
     private let spinner = UIActivityIndicatorView(style: .large)
     private var goToAllScansViewButton = UIButton(type: .system)
     private var goToMainViewButton = UIButton(type: .system)
@@ -37,8 +37,8 @@ class SaveController: UIViewController, UITextFieldDelegate {
         fileNameInput.backgroundColor = .systemBackground
         view.addSubview(fileNameInput)
         
-        saveFileButton = createSaveViewButton(iconName: "square.and.arrow.up")
-        view.addSubview(saveFileButton)
+        exportButton = createExportViewButton(iconName: "square.and.arrow.up")
+        view.addSubview(exportButton)
         
         spinner.color = .white
         spinner.backgroundColor = .clear
@@ -46,10 +46,10 @@ class SaveController: UIViewController, UITextFieldDelegate {
         spinner.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(spinner)
         
-        goToAllScansViewButton = createSaveViewButton(iconName: "text.justify")
+        goToAllScansViewButton = createExportViewButton(iconName: "text.justify")
         view.addSubview(goToAllScansViewButton)
         
-        goToMainViewButton = createSaveViewButton(iconName: "arrow.turn.down.left")
+        goToMainViewButton = createExportViewButton(iconName: "arrow.turn.down.left")
         view.addSubview(goToMainViewButton)
         
         NSLayoutConstraint.activate([
@@ -61,10 +61,10 @@ class SaveController: UIViewController, UITextFieldDelegate {
             fileNameInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             fileNameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            saveFileButton.widthAnchor.constraint(equalToConstant: 40),
-            saveFileButton.heightAnchor.constraint(equalToConstant: 40),
-            saveFileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveFileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            exportButton.widthAnchor.constraint(equalToConstant: 40),
+            exportButton.heightAnchor.constraint(equalToConstant: 40),
+            exportButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            exportButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
             spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -84,8 +84,8 @@ class SaveController: UIViewController, UITextFieldDelegate {
     @objc
     func viewValueChanged(view: UIView) {
         switch view {
-        case saveFileButton:
-            executeSave()
+        case exportButton:
+            executeExport()
             
         case goToAllScansViewButton:
             goToAllScansView()
@@ -109,22 +109,22 @@ class SaveController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    private func beforeSave() {
-        saveFileButton.isEnabled = false
+    private func beforeExport() {
+        exportButton.isEnabled = false
         isModalInPresentation = true
     }
-    func onSaveError(error: XError) {
+    func onExportError(error: XError) {
         dismissModal()
-        mainController.onSaveError(error: error)
+        mainController.onExportError(error: error)
     }
-    @objc func executeSave() -> Void {
+    @objc func executeExport() -> Void {
         let fileName = !fileNameInput.text!.isEmpty ? fileNameInput.text : "untitled"
         
-        mainController.renderer.saveAsPlyFile(
+        mainController.renderer.exportAsPlyFile(
             fileName: fileName!,
-            beforeGlobalThread: [beforeSave, spinner.startAnimating],
-            afterGlobalThread: [dismissModal, spinner.stopAnimating, mainController.afterSave],
-            errorCallback: onSaveError)
+            beforeGlobalThread: [beforeExport, spinner.startAnimating],
+            afterGlobalThread: [dismissModal, spinner.stopAnimating, mainController.afterExport],
+            errorCallback: onExportError)
     }
     
     @objc func goToMainView() {
@@ -136,12 +136,12 @@ class SaveController: UIViewController, UITextFieldDelegate {
     }
 }
 
-func createSaveViewButton(iconName: String) -> UIButton {
+func createExportViewButton(iconName: String) -> UIButton {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setBackgroundImage(.init(systemName: iconName), for: .normal)
     button.tintColor = .label
-    button.addTarget(SaveController.self(), action: #selector(SaveController.viewValueChanged), for: .touchUpInside)
+    button.addTarget(ExportController.self(), action: #selector(ExportController.viewValueChanged), for: .touchUpInside)
     return button
 }
 

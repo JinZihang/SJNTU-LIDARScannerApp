@@ -292,13 +292,13 @@ extension Renderer {
         return self.cpuParticlesBuffer
     }
     
-    func saveAsPlyFile(fileName: String,
+    func exportAsPlyFile(fileName: String,
                        beforeGlobalThread: [() -> Void],
                        afterGlobalThread: [() -> Void],
                        errorCallback: (XError) -> Void) {
         
         guard !isSavingFile else {
-            return errorCallback(XError.alreadySavingFile)
+            return errorCallback(XError.alreadyExporting)
         }
         guard !cpuParticlesBuffer.isEmpty else {
             return errorCallback(XError.noScanDone)
@@ -314,7 +314,7 @@ extension Renderer {
                     fileName: fileName,
                     cpuParticlesBuffer: &self.cpuParticlesBuffer,
                     highConfCount: self.highConfCount)) } catch {
-                self.savingError = XError.savingFailed
+                self.savingError = XError.exportingFailed
             }
     
             DispatchQueue.main.async {

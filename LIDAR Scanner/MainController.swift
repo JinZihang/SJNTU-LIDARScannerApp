@@ -17,7 +17,7 @@ final class MainController: UIViewController, ARSessionDelegate {
     private var toggleCameraViewButton = UIButton(type: .system)
     private var toggleParticlesButton = UIButton(type: .system)
     private var clearButton = UIButton(type: .system)
-    private var saveButton = UIButton(type: .system)
+    private var exportButton = UIButton(type: .system)
     private var supportButton = UIButton(type: .system)
     
     private let session = ARSession()
@@ -68,8 +68,8 @@ final class MainController: UIViewController, ARSessionDelegate {
         clearButton = createMainViewButton(iconName: "trash")
         view.addSubview(clearButton)
         
-        saveButton = createMainViewButton(iconName: "square.and.arrow.up")
-        view.addSubview(saveButton)
+        exportButton = createMainViewButton(iconName: "square.and.arrow.up")
+        view.addSubview(exportButton)
         
         supportButton = createMainViewButton(iconName: "questionmark.circle")
         view.addSubview(supportButton)
@@ -105,10 +105,10 @@ final class MainController: UIViewController, ARSessionDelegate {
             clearButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -105),
             clearButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
-            saveButton.widthAnchor.constraint(equalToConstant: 40),
-            saveButton.heightAnchor.constraint(equalToConstant: 40),
-            saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-            saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            exportButton.widthAnchor.constraint(equalToConstant: 40),
+            exportButton.heightAnchor.constraint(equalToConstant: 40),
+            exportButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+            exportButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
             supportButton.widthAnchor.constraint(equalToConstant: 40),
             supportButton.heightAnchor.constraint(equalToConstant: 40),
@@ -174,10 +174,10 @@ final class MainController: UIViewController, ARSessionDelegate {
             toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
             renderer.clearParticles()
             
-        case saveButton:
+        case exportButton:
             renderer.isInViewSceneMode = true
             toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
-            goToSaveView()
+            goToExportView()
         
         case supportButton:
             renderer.isInViewSceneMode = true
@@ -251,10 +251,10 @@ extension MainController: MTKViewDelegate {
 // MARK: - Added controller functionality
 
 extension MainController {
-    func goToSaveView() {
-        let saveController = SaveController()
-        saveController.mainController = self
-        present(saveController, animated: true, completion: nil)
+    func goToExportView() {
+        let exportController = ExportController()
+        exportController.mainController = self
+        present(exportController, animated: true, completion: nil)
     }
     func goToAllScansView() {
         let allScansController = AllScansController()
@@ -270,9 +270,9 @@ extension MainController {
     func displayErrorMessage(error: XError) -> Void {
         var title: String
         switch error {
-        case .alreadySavingFile: title = "Saving in progress, please wait."
         case .noScanDone: title = "No scan data to save."
-        case .savingFailed: title = "Saving failed."
+        case .alreadyExporting: title = "Exporting in progress, please wait."
+        case .exportingFailed: title = "Exporting failed."
         }
         
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
@@ -282,7 +282,7 @@ extension MainController {
             alert.dismiss(animated: true, completion: nil)
         }
     }
-    func onSaveError(error: XError) {
+    func onExportError(error: XError) {
         displayErrorMessage(error: error)
         renderer.savingError = nil
     }
@@ -293,14 +293,14 @@ extension MainController {
                 applicationActivities: .none),
             animated: true)
     }
-    func afterSave() -> Void {
+    func afterExport() -> Void {
         let err = renderer.savingError
         if err == nil {
             return export(url: renderer.savedCloudURLs.last!)
         }
         try? FileManager.default.removeItem(at: renderer.savedCloudURLs.last!)
         renderer.savedCloudURLs.removeLast()
-        onSaveError(error: err!)
+        onExportError(error: err!)
     }
 }
 
