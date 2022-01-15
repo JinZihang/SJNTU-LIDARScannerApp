@@ -53,7 +53,7 @@ final class MainController: UIViewController, ARSessionDelegate {
         selectWorldMapButton = createMainViewButton(iconName: "text.justify")
         view.addSubview(selectWorldMapButton)
         
-        loadWorldMapButton = createMainViewButton(iconName: "square.and.arrow.down")
+        loadWorldMapButton = createMainViewButton(iconName: "mappin.slash")
         view.addSubview(loadWorldMapButton)
         
         toggleScanButton = createMainViewButton(iconName: "livephoto")
@@ -93,7 +93,7 @@ final class MainController: UIViewController, ARSessionDelegate {
             toggleCameraViewButton.widthAnchor.constraint(equalToConstant: 40),
             toggleCameraViewButton.heightAnchor.constraint(equalToConstant: 32),
             toggleCameraViewButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-            toggleCameraViewButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            toggleCameraViewButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -29),
             
             toggleParticlesButton.widthAnchor.constraint(equalToConstant: 40),
             toggleParticlesButton.heightAnchor.constraint(equalToConstant: 40),
