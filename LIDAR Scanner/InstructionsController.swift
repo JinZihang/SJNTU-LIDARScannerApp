@@ -1,14 +1,13 @@
 //
-//  HelpsController.swift
+//  InstructionsController.swift
 //  LIDAR Scanner
 //
 //  Created by Zihang Jin on 18/12/21.
 //
 
-import Foundation
 import SwiftUI
 
-class HelpsController : UIViewController {
+class InstructionsController : UIViewController {
     private var helpsTitleLable = UILabel()
     private var goToMainViewButton = UIButton(type: .system)
     
@@ -18,9 +17,6 @@ class HelpsController : UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        helpsTitleLable = createLable(text: "Help")
-        view.addSubview(helpsTitleLable)
-        
         goToMainViewButton.translatesAutoresizingMaskIntoConstraints = false
         goToMainViewButton.setBackgroundImage(.init(systemName: "arrow.turn.down.left"), for: .normal)
         goToMainViewButton.tintColor = .label
@@ -28,9 +24,6 @@ class HelpsController : UIViewController {
         view.addSubview(goToMainViewButton)
         
         NSLayoutConstraint.activate([
-            helpsTitleLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            helpsTitleLable.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
-            
             goToMainViewButton.widthAnchor.constraint(equalToConstant: 40),
             goToMainViewButton.heightAnchor.constraint(equalToConstant: 40),
             goToMainViewButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),

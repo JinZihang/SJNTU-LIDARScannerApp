@@ -5,7 +5,6 @@
 //  Created by Zihang Jin on 17/12/21.
 //
 
-import Foundation
 import ARKit
 
 enum XError : Error {

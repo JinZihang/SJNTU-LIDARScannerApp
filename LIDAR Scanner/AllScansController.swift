@@ -5,7 +5,6 @@
 //  Created by Zihang Jin on 18/12/21.
 //
 
-import Foundation
 import SwiftUI
 
 class AllScansController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
