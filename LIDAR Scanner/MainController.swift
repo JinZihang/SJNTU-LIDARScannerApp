@@ -11,12 +11,13 @@ import MetalKit
 import ARKit
 
 final class MainController: UIViewController, ARSessionDelegate {
+    private var exportWorldMapButton = UIButton(type: .system)
     private var selectWorldMapButton = UIButton(type: .system)
     private var loadWorldMapButton = UIButton(type: .system)
     private var toggleScanButton = UIButton(type: .system)
     private var toggleCameraViewButton = UIButton(type: .system)
     private var toggleParticlesButton = UIButton(type: .system)
-    private var clearButton = UIButton(type: .system)
+    private var clearParticlesButton = UIButton(type: .system)
     private var exportPointCloudButton = UIButton(type: .system)
     private var supportButton = UIButton(type: .system)
     
@@ -50,6 +51,9 @@ final class MainController: UIViewController, ARSessionDelegate {
         }
         
         // Add buttons to the view
+        exportWorldMapButton = createMainViewButton(iconName: "square.and.arrow.up")
+        view.addSubview(exportWorldMapButton)
+        
         selectWorldMapButton = createMainViewButton(iconName: "text.justify")
         view.addSubview(selectWorldMapButton)
         
@@ -65,8 +69,8 @@ final class MainController: UIViewController, ARSessionDelegate {
         toggleParticlesButton = createMainViewButton(iconName: "circle.grid.hex.fill")
         view.addSubview(toggleParticlesButton)
         
-        clearButton = createMainViewButton(iconName: "trash")
-        view.addSubview(clearButton)
+        clearParticlesButton = createMainViewButton(iconName: "trash")
+        view.addSubview(clearParticlesButton)
         
         exportPointCloudButton = createMainViewButton(iconName: "square.and.arrow.up")
         view.addSubview(exportPointCloudButton)
@@ -75,14 +79,19 @@ final class MainController: UIViewController, ARSessionDelegate {
         view.addSubview(supportButton)
         
         NSLayoutConstraint.activate([
+            exportWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
+            exportWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
+            exportWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            exportWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            
             selectWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
             selectWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
-            selectWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            selectWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
             selectWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             
             loadWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
             loadWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
-            loadWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
+            loadWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 170),
             loadWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             
             toggleScanButton.widthAnchor.constraint(equalToConstant: 40),
@@ -100,10 +109,10 @@ final class MainController: UIViewController, ARSessionDelegate {
             toggleParticlesButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
             toggleParticlesButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
-            clearButton.widthAnchor.constraint(equalToConstant: 40),
-            clearButton.heightAnchor.constraint(equalToConstant: 40),
-            clearButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -105),
-            clearButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            clearParticlesButton.widthAnchor.constraint(equalToConstant: 40),
+            clearParticlesButton.heightAnchor.constraint(equalToConstant: 40),
+            clearParticlesButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -105),
+            clearParticlesButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
             exportPointCloudButton.widthAnchor.constraint(equalToConstant: 40),
             exportPointCloudButton.heightAnchor.constraint(equalToConstant: 40),
@@ -136,6 +145,9 @@ final class MainController: UIViewController, ARSessionDelegate {
     @objc
     func viewValueChanged(view: UIView) {
         switch view {
+        case exportWorldMapButton:
+            break
+            
         case selectWorldMapButton:
             break
             
@@ -169,7 +181,7 @@ final class MainController: UIViewController, ARSessionDelegate {
             let iconName = "circle.grid.hex" + (renderer.showParticles ? ".fill" : "")
             self.toggleParticlesButton.setBackgroundImage(.init(systemName: iconName), for: .normal)
             
-        case clearButton:
+        case clearParticlesButton:
             renderer.isInViewSceneMode = true
             toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
             renderer.clearParticles()
