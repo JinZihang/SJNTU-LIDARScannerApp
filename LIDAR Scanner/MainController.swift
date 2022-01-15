@@ -11,6 +11,8 @@ import MetalKit
 import ARKit
 
 final class MainController: UIViewController, ARSessionDelegate {
+    private var selectWorldMapButton = UIButton(type: .system)
+    private var loadWorldMapButton = UIButton(type: .system)
     private var toggleScanButton = UIButton(type: .system)
     private var toggleCameraViewButton = UIButton(type: .system)
     private var toggleParticlesButton = UIButton(type: .system)
@@ -48,8 +50,14 @@ final class MainController: UIViewController, ARSessionDelegate {
         }
         
         // Add buttons to the view
-        supportButton = createMainViewButton(iconName: "questionmark.circle")
-        view.addSubview(supportButton)
+        selectWorldMapButton = createMainViewButton(iconName: "text.justify")
+        view.addSubview(selectWorldMapButton)
+        
+        loadWorldMapButton = createMainViewButton(iconName: "square.and.arrow.down")
+        view.addSubview(loadWorldMapButton)
+        
+        toggleScanButton = createMainViewButton(iconName: "livephoto")
+        view.addSubview(toggleScanButton)
         
         toggleCameraViewButton = createMainViewButton(iconName: "eye")
         view.addSubview(toggleCameraViewButton)
@@ -57,20 +65,30 @@ final class MainController: UIViewController, ARSessionDelegate {
         toggleParticlesButton = createMainViewButton(iconName: "circle.grid.hex.fill")
         view.addSubview(toggleParticlesButton)
         
-        toggleScanButton = createMainViewButton(iconName: "livephoto")
-        view.addSubview(toggleScanButton)
-        
         clearButton = createMainViewButton(iconName: "trash")
         view.addSubview(clearButton)
         
         saveButton = createMainViewButton(iconName: "square.and.arrow.up")
         view.addSubview(saveButton)
         
+        supportButton = createMainViewButton(iconName: "questionmark.circle")
+        view.addSubview(supportButton)
+        
         NSLayoutConstraint.activate([
-            supportButton.widthAnchor.constraint(equalToConstant: 40),
-            supportButton.heightAnchor.constraint(equalToConstant: 40),
-            supportButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-            supportButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            selectWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
+            selectWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
+            selectWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            selectWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            
+            loadWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
+            loadWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
+            loadWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
+            loadWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            
+            toggleScanButton.widthAnchor.constraint(equalToConstant: 40),
+            toggleScanButton.heightAnchor.constraint(equalToConstant: 40),
+            toggleScanButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            toggleScanButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
             toggleCameraViewButton.widthAnchor.constraint(equalToConstant: 40),
             toggleCameraViewButton.heightAnchor.constraint(equalToConstant: 32),
@@ -82,11 +100,6 @@ final class MainController: UIViewController, ARSessionDelegate {
             toggleParticlesButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
             toggleParticlesButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
             
-            toggleScanButton.widthAnchor.constraint(equalToConstant: 40),
-            toggleScanButton.heightAnchor.constraint(equalToConstant: 40),
-            toggleScanButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            toggleScanButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
-            
             clearButton.widthAnchor.constraint(equalToConstant: 40),
             clearButton.heightAnchor.constraint(equalToConstant: 40),
             clearButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -105),
@@ -96,6 +109,11 @@ final class MainController: UIViewController, ARSessionDelegate {
             saveButton.heightAnchor.constraint(equalToConstant: 40),
             saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
             saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -25),
+            
+            supportButton.widthAnchor.constraint(equalToConstant: 40),
+            supportButton.heightAnchor.constraint(equalToConstant: 40),
+            supportButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+            supportButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
         ])
     }
     
@@ -118,6 +136,12 @@ final class MainController: UIViewController, ARSessionDelegate {
     @objc
     func viewValueChanged(view: UIView) {
         switch view {
+        case selectWorldMapButton:
+            break
+            
+        case loadWorldMapButton:
+            break
+            
         case toggleScanButton:
             renderer.isInViewSceneMode = !renderer.isInViewSceneMode
             if !renderer.isInViewSceneMode {
@@ -246,9 +270,9 @@ extension MainController {
     func displayErrorMessage(error: XError) -> Void {
         var title: String
         switch error {
-            case .alreadySavingFile: title = "Saving in progress, please wait."
-            case .noScanDone: title = "No scan data to save."
-            case .savingFailed: title = "Saving failed."
+        case .alreadySavingFile: title = "Saving in progress, please wait."
+        case .noScanDone: title = "No scan data to save."
+        case .savingFailed: title = "Saving failed."
         }
         
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
