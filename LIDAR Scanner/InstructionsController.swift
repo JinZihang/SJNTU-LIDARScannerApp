@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class InstructionsController : UIViewController {
+class InstructionsController: UIViewController {
     private var helpsTitleLable = UILabel()
     private var goToMainViewButton = UIButton(type: .system)
     
@@ -31,7 +31,7 @@ class InstructionsController : UIViewController {
         ])
     }
     
-    func dismissModal() {
+    private func dismissModal() {
         self.dismiss(animated: true, completion: nil)
     }
     @objc func goToMainView() {

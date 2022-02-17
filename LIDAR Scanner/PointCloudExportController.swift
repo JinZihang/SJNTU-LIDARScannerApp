@@ -1,5 +1,5 @@
 //
-//  ExportController.swift
+//  PointCloudExportController.swift
 //  LIDAR Scanner
 //
 //  Created by Zihang Jin on 18/12/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-class ExportController: UIViewController, UITextFieldDelegate {
+class PointCloudExportController: UIViewController, UITextFieldDelegate {
     private var exportData = [URL]()
     
     private var particlesCountLabel = UILabel()
-    private let fileNameInput = UITextField()
+    private let pointCloudFileNameInput = UITextField()
     private var exportButton = UIButton(type: .system)
     private let spinner = UIActivityIndicatorView(style: .large)
     private var goToAllScansViewButton = UIButton(type: .system)
@@ -26,17 +26,17 @@ class ExportController: UIViewController, UITextFieldDelegate {
         particlesCountLabel = createLable(text: "Scanned \(mainController.renderer.highConfCount) Points")
         view.addSubview(particlesCountLabel)
         
-        fileNameInput.delegate = self
-        fileNameInput.isUserInteractionEnabled = true
-        fileNameInput.translatesAutoresizingMaskIntoConstraints = false
-        fileNameInput.placeholder = "Custom File Name"
-        fileNameInput.borderStyle = .roundedRect
-        fileNameInput.autocorrectionType = .no
-        fileNameInput.returnKeyType = .done
-        fileNameInput.backgroundColor = .systemBackground
-        view.addSubview(fileNameInput)
+        pointCloudFileNameInput.delegate = self
+        pointCloudFileNameInput.isUserInteractionEnabled = true
+        pointCloudFileNameInput.translatesAutoresizingMaskIntoConstraints = false
+        pointCloudFileNameInput.placeholder = "Custom File Name"
+        pointCloudFileNameInput.borderStyle = .roundedRect
+        pointCloudFileNameInput.autocorrectionType = .no
+        pointCloudFileNameInput.returnKeyType = .done
+        pointCloudFileNameInput.backgroundColor = .systemBackground
+        view.addSubview(pointCloudFileNameInput)
         
-        exportButton = createExportViewButton(iconName: "square.and.arrow.up")
+        exportButton = createPointCloudExportViewButton(iconName: "square.and.arrow.up")
         view.addSubview(exportButton)
         
         spinner.color = .white
@@ -45,20 +45,20 @@ class ExportController: UIViewController, UITextFieldDelegate {
         spinner.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(spinner)
         
-        goToAllScansViewButton = createExportViewButton(iconName: "text.justify")
+        goToAllScansViewButton = createPointCloudExportViewButton(iconName: "text.justify")
         view.addSubview(goToAllScansViewButton)
         
-        goToMainViewButton = createExportViewButton(iconName: "arrow.turn.down.left")
+        goToMainViewButton = createPointCloudExportViewButton(iconName: "arrow.turn.down.left")
         view.addSubview(goToMainViewButton)
         
         NSLayoutConstraint.activate([
             particlesCountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             particlesCountLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             
-            fileNameInput.widthAnchor.constraint(equalToConstant: 300),
-            fileNameInput.heightAnchor.constraint(equalToConstant: 45),
-            fileNameInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            fileNameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            pointCloudFileNameInput.widthAnchor.constraint(equalToConstant: 300),
+            pointCloudFileNameInput.heightAnchor.constraint(equalToConstant: 45),
+            pointCloudFileNameInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pointCloudFileNameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             exportButton.widthAnchor.constraint(equalToConstant: 40),
             exportButton.heightAnchor.constraint(equalToConstant: 40),
@@ -80,8 +80,7 @@ class ExportController: UIViewController, UITextFieldDelegate {
         ])
     }
     
-    @objc
-    func viewValueChanged(view: UIView) {
+    @objc func viewValueChanged(view: UIView) -> Void {
         switch view {
         case exportButton:
             executeExport()
@@ -104,43 +103,43 @@ class ExportController: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    func dismissModal() {
+    private func dismissModal() -> Void {
         self.dismiss(animated: true, completion: nil)
     }
     
-    private func beforeExport() {
+    private func beforeExport() -> Void {
         exportButton.isEnabled = false
         isModalInPresentation = true
     }
-    func onExportError(error: XError) {
+    private func onExportError(error: XError) -> Void {
         dismissModal()
         mainController.onExportError(error: error)
     }
     @objc func executeExport() -> Void {
-        let fileName = !fileNameInput.text!.isEmpty ? fileNameInput.text : "untitled"
+        let pointCloudFileName = !pointCloudFileNameInput.text!.isEmpty ? pointCloudFileNameInput.text : "untitled"
         
         mainController.renderer.exportAsPlyFile(
-            fileName: fileName!,
+            fileName: pointCloudFileName!,
             beforeGlobalThread: [beforeExport, spinner.startAnimating],
             afterGlobalThread: [dismissModal, spinner.stopAnimating, mainController.afterExport],
             errorCallback: onExportError)
     }
     
-    @objc func goToMainView() {
+    @objc func goToMainView() -> Void {
         dismissModal()
     }
-    @objc func goToAllScansView() {
+    @objc func goToAllScansView() -> Void {
         dismissModal()
         mainController.goToAllScansView()
     }
 }
 
-func createExportViewButton(iconName: String) -> UIButton {
+private func createPointCloudExportViewButton(iconName: String) -> UIButton {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setBackgroundImage(.init(systemName: iconName), for: .normal)
     button.tintColor = .label
-    button.addTarget(ExportController.self(), action: #selector(ExportController.viewValueChanged), for: .touchUpInside)
+    button.addTarget(PointCloudExportController.self(), action: #selector(PointCloudExportController.viewValueChanged), for: .touchUpInside)
     return button
 }
 
