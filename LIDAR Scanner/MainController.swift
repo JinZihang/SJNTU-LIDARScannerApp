@@ -24,6 +24,20 @@ final class MainController: UIViewController, ARSessionDelegate {
     private let session = ARSession()
     var renderer: Renderer!
     
+    // MARK: - UI Setting
+    
+    // Auto-hide the home indicator to maximize immersion in AR experiences
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
+    // Hide the status bar to maximize immersion in AR experiences
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -142,8 +156,7 @@ final class MainController: UIViewController, ARSessionDelegate {
         UIApplication.shared.isIdleTimerDisabled = true
     }
     
-    @objc
-    func viewValueChanged(view: UIView) {
+    @objc func viewValueChanged(view: UIView) {
         switch view {
         case exportWorldMapButton:
             break
@@ -158,13 +171,10 @@ final class MainController: UIViewController, ARSessionDelegate {
             renderer.isInViewSceneMode = !renderer.isInViewSceneMode
             if !renderer.isInViewSceneMode {
                 renderer.showParticles = true
-                self.toggleParticlesButton.setBackgroundImage(
-                    .init(systemName: "circle.grid.hex.fill"), for: .normal)
-                self.toggleScanButton.setBackgroundImage(
-                    .init(systemName: "livephoto.slash"), for: .normal)
+                self.toggleParticlesButton.setBackgroundImage(.init(systemName: "circle.grid.hex.fill"), for: .normal)
+                self.toggleScanButton.setBackgroundImage(.init(systemName: "livephoto.slash"), for: .normal)
             } else {
-                self.toggleScanButton.setBackgroundImage(
-                    .init(systemName: "livephoto"), for: .normal)
+                self.toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
             }
             
         case toggleCameraViewButton:
@@ -189,7 +199,7 @@ final class MainController: UIViewController, ARSessionDelegate {
         case exportPointCloudButton:
             renderer.isInViewSceneMode = true
             toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
-            goToExportView()
+            goToPointCloudExportView()
         
         case supportButton:
             renderer.isInViewSceneMode = true
@@ -208,15 +218,7 @@ final class MainController: UIViewController, ARSessionDelegate {
         session.pause()
     }
     
-    // Auto-hide the home indicator to maximize immersion in AR experiences
-    override var prefersHomeIndicatorAutoHidden: Bool {
-        return true
-    }
-    
-    // Hide the status bar to maximize immersion in AR experiences
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    // MARK: - AR Session Observer
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -231,7 +233,7 @@ final class MainController: UIViewController, ARSessionDelegate {
         let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
         
         DispatchQueue.main.async {
-            // Present an alert informing about the error that has occurred.
+            // Present an alert informing about the error that has occurred
             let alertController = UIAlertController(title: "The AR session failed.", message: errorMessage, preferredStyle: .alert)
             let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
                 alertController.dismiss(animated: true, completion: nil)
@@ -244,9 +246,8 @@ final class MainController: UIViewController, ARSessionDelegate {
         }
     }
 }
-    
-    
-// MARK: - MTKViewDelegate
+
+// MARK: - MTK View Delegate
 
 extension MainController: MTKViewDelegate {
     // Called whenever view changes orientation or layout is changed
@@ -260,20 +261,20 @@ extension MainController: MTKViewDelegate {
     }
 }
 
-// MARK: - Added controller functionality
+// MARK: - Extra Controller Functionality
 
 extension MainController {
-    func goToExportView() {
-        let exportController = ExportController()
-        exportController.mainController = self
-        present(exportController, animated: true, completion: nil)
+    func goToPointCloudExportView() -> Void {
+        let pointCloudExportController = PointCloudExportController()
+        pointCloudExportController.mainController = self
+        present(pointCloudExportController, animated: true, completion: nil)
     }
-    func goToAllScansView() {
+    func goToAllScansView() -> Void {
         let allScansController = AllScansController()
         allScansController.mainController = self
         present(allScansController, animated: true, completion: nil)
     }
-    func goToInstructionsView() {
+    func goToInstructionsView() -> Void {
         let instructionsController = InstructionsController()
         instructionsController.mainController = self
         present(instructionsController, animated: true, completion: nil)
@@ -294,7 +295,7 @@ extension MainController {
             alert.dismiss(animated: true, completion: nil)
         }
     }
-    func onExportError(error: XError) {
+    func onExportError(error: XError) -> Void {
         displayErrorMessage(error: error)
         renderer.savingError = nil
     }
@@ -316,7 +317,7 @@ extension MainController {
     }
 }
 
-// MARK: - RenderDestinationProvider
+// MARK: - Render Destination Provider
 
 protocol RenderDestinationProvider {
     var currentRenderPassDescriptor: MTLRenderPassDescriptor? { get }
@@ -326,20 +327,13 @@ protocol RenderDestinationProvider {
     var sampleCount: Int { get set }
 }
 
-func createMainViewButton(iconName: String) -> UIButton {
+private func createMainViewButton(iconName: String) -> UIButton {
     let button = UIButton(type: .system)
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setBackgroundImage(.init(systemName: iconName), for: .normal)
     button.tintColor = .white
     button.addTarget(MainController.self(), action: #selector(MainController.viewValueChanged), for: .touchUpInside)
     return button
-}
-func createImage(iconName: String) -> UIImageView {
-    let image = UIImageView()
-    image.image = .init(systemName: iconName)
-    image.translatesAutoresizingMaskIntoConstraints = false
-    image.tintColor = .label
-    return image
 }
 func createLable(text: String) -> UILabel {
     let label = UILabel()
