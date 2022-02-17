@@ -314,7 +314,7 @@ extension Renderer {
                     fileName: fileName,
                     cpuParticlesBuffer: &self.cpuParticlesBuffer,
                     highConfCount: self.highConfCount)) } catch {
-                self.savingError = XError.exportingFailed
+                self.savingError = XError.failedToExport
             }
     
             DispatchQueue.main.async {

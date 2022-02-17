@@ -283,9 +283,9 @@ extension MainController {
     func displayErrorMessage(error: XError) -> Void {
         var title: String
         switch error {
-        case .noScanDone: title = "No scan data to save."
-        case .alreadyExporting: title = "Exporting in progress, please wait."
-        case .exportingFailed: title = "Exporting failed."
+        case .noScanDone: title = "No scan data to save"
+        case .alreadyExporting: title = "Exporting in progress, please wait"
+        case .failedToExport: title = "Failed to export"
         }
         
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)

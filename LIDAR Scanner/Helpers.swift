@@ -10,7 +10,7 @@ import ARKit
 enum XError : Error {
     case noScanDone
     case alreadyExporting
-    case exportingFailed
+    case failedToExport
 }
 
 typealias Float2 = SIMD2<Float>
