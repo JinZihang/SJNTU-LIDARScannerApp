@@ -8,8 +8,6 @@
 import SwiftUI
 
 class PointCloudExportController: UIViewController, UITextFieldDelegate {
-    private var exportData = [URL]()
-    
     private var particlesCountLabel = UILabel()
     private let pointCloudFileNameInput = UITextField()
     private var exportButton = UIButton(type: .system)
