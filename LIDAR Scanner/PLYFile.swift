@@ -28,8 +28,11 @@ final class PLYFile {
                       cpuParticlesBuffer: inout [CPUParticle],
                       highConfCount: Int) throws -> URL {
         
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let plyFile = documentsDirectory.appendingPathComponent("\(fileName).ply", isDirectory: false)
+        // renderer.loadSavedPointClouds() makes sure the folder for storing point clouds exists
+        let pointCloudDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("pointclouds", isDirectory: true)
+        
+        let plyFile = pointCloudDirectory.appendingPathComponent("\(fileName).ply", isDirectory: false)
         FileManager.default.createFile(atPath: plyFile.path, contents: nil, attributes: nil)
         
         var headersString = ""

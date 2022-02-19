@@ -335,9 +335,22 @@ extension Renderer {
     }
     
     func loadSavedPointClouds() {
-        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let pointCloudDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("pointclouds", isDirectory: true)
+        
+        // Create the folder for storing point clouds if it the folder does not exist
+        var isDirectory: ObjCBool = true
+        if !FileManager.default.fileExists(atPath: pointCloudDirectory.absoluteString, isDirectory: &isDirectory) {
+            do {
+                try FileManager.default.createDirectory(at: pointCloudDirectory, withIntermediateDirectories: true, attributes: nil)
+            }
+            catch {
+                fatalError("Failed to create a directory for storing point clouds: \(error.self)")
+            }
+        }
+        
         savedPointCloudsURLs = try! FileManager.default
-            .contentsOfDirectory(at: docs, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+            .contentsOfDirectory(at: pointCloudDirectory, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
     }
 }
 
