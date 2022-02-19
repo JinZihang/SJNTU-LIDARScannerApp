@@ -11,7 +11,7 @@ import MetalKit
 import ARKit
 
 final class MainController: UIViewController, ARSessionDelegate {
-    private var exportWorldMapButton = UIButton(type: .system)
+    private var saveWorldMapButton = UIButton(type: .system)
     private var selectWorldMapButton = UIButton(type: .system)
     private var loadWorldMapButton = UIButton(type: .system)
     private var toggleScanButton = UIButton(type: .system)
@@ -65,13 +65,15 @@ final class MainController: UIViewController, ARSessionDelegate {
         }
         
         // Add buttons to the view
-        exportWorldMapButton = createMainViewButton(iconName: "square.and.arrow.up")
-        view.addSubview(exportWorldMapButton)
+        saveWorldMapButton = createMainViewButton(iconName: "location.slash")
+        saveWorldMapButton.isEnabled = false
+        view.addSubview(saveWorldMapButton)
         
         selectWorldMapButton = createMainViewButton(iconName: "text.justify")
         view.addSubview(selectWorldMapButton)
         
         loadWorldMapButton = createMainViewButton(iconName: "mappin.slash")
+        loadWorldMapButton.isEnabled = false
         view.addSubview(loadWorldMapButton)
         
         toggleScanButton = createMainViewButton(iconName: "livephoto")
@@ -93,10 +95,10 @@ final class MainController: UIViewController, ARSessionDelegate {
         view.addSubview(supportButton)
         
         NSLayoutConstraint.activate([
-            exportWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
-            exportWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
-            exportWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-            exportWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            saveWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
+            saveWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
+            saveWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            saveWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             
             selectWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
             selectWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
@@ -158,7 +160,7 @@ final class MainController: UIViewController, ARSessionDelegate {
     
     @objc func viewValueChanged(view: UIView) {
         switch view {
-        case exportWorldMapButton:
+        case saveWorldMapButton:
             break
             
         case selectWorldMapButton:
