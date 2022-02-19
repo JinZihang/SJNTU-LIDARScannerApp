@@ -138,9 +138,7 @@ final class Renderer {
     private func updateCapturedImageTextures(frame: ARFrame) {
         // Create two textures (Y and CbCr) from the provided frame's captured image
         let pixelBuffer = frame.capturedImage
-        guard CVPixelBufferGetPlaneCount(pixelBuffer) >= 2 else {
-            return
-        }
+        guard CVPixelBufferGetPlaneCount(pixelBuffer) >= 2 else { return }
         
         capturedImageTextureY = makeTexture(fromPixelBuffer: pixelBuffer, pixelFormat: .r8Unorm, planeIndex: 0)
         capturedImageTextureCbCr = makeTexture(fromPixelBuffer: pixelBuffer, pixelFormat: .rg8Unorm, planeIndex: 1)
@@ -148,9 +146,7 @@ final class Renderer {
     
     private func updateDepthTextures(frame: ARFrame) -> Bool {
         guard let depthMap = frame.smoothedSceneDepth?.depthMap,
-            let confidenceMap = frame.smoothedSceneDepth?.confidenceMap else {
-                return false
-        }
+            let confidenceMap = frame.smoothedSceneDepth?.confidenceMap else { return false }
         
         depthTexture = makeTexture(fromPixelBuffer: depthMap, pixelFormat: .r32Float, planeIndex: 0)
         confidenceTexture = makeTexture(fromPixelBuffer: confidenceMap, pixelFormat: .r8Uint, planeIndex: 0)
@@ -180,9 +176,7 @@ final class Renderer {
         
         _ = inFlightSemaphore.wait(timeout: DispatchTime.distantFuture)
         commandBuffer.addCompletedHandler { [weak self] commandBuffer in
-            if let self = self {
-                self.inFlightSemaphore.signal()
-            }
+            if let self = self { self.inFlightSemaphore.signal() }
         }
         
         // Update frame data
@@ -341,10 +335,9 @@ extension Renderer {
     }
     
     func loadSavedPointClouds() {
-        let docs = FileManager.default.urls(
-            for: .documentDirectory, in: .userDomainMask)[0]
-        savedPointCloudsURLs = try! FileManager.default.contentsOfDirectory(
-            at: docs, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        savedPointCloudsURLs = try! FileManager.default
+            .contentsOfDirectory(at: docs, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
     }
 }
 
@@ -434,9 +427,7 @@ private extension Renderer {
         var texture: CVMetalTexture? = nil
         let status = CVMetalTextureCacheCreateTextureFromImage(nil, textureCache, pixelBuffer, nil, pixelFormat, width, height, planeIndex, &texture)
         
-        if status != kCVReturnSuccess {
-            texture = nil
-        }
+        if status != kCVReturnSuccess { texture = nil }
 
         return texture
     }
