@@ -8,6 +8,7 @@
 import ARKit
 
 enum XError : Error {
+    case failedToGetWorldMap
     case noScanDone
     case alreadyExporting
     case failedToExport

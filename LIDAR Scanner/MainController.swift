@@ -42,7 +42,7 @@ final class MainController: UIViewController, ARSessionDelegate {
         super.viewDidLoad()
         
         guard let device = MTLCreateSystemDefaultDevice() else {
-            print("Metal is not supported on this device")
+            print("Metal is not supported on this device.")
             return
         }
         
@@ -236,8 +236,8 @@ final class MainController: UIViewController, ARSessionDelegate {
         
         DispatchQueue.main.async {
             // Present an alert informing about the error that has occurred
-            let alertController = UIAlertController(title: "The AR session failed.", message: errorMessage, preferredStyle: .alert)
-            let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
+            let alertController = UIAlertController(title: "AR session failed.", message: errorMessage, preferredStyle: .alert)
+            let restartAction = UIAlertAction(title: "Restarting AR session.", style: .default) { _ in
                 alertController.dismiss(animated: true, completion: nil)
                 if let configuration = self.session.configuration {
                     self.session.run(configuration, options: .resetSceneReconstruction)
@@ -285,9 +285,10 @@ extension MainController {
     func displayErrorMessage(error: XError) -> Void {
         var title: String
         switch error {
-        case .noScanDone: title = "No scan data to save"
-        case .alreadyExporting: title = "Exporting in progress, please wait"
-        case .failedToExport: title = "Failed to export"
+        case .failedToGetWorldMap: title = "Failed to get world map data."
+        case .noScanDone: title = "No scan data to save."
+        case .alreadyExporting: title = "Exporting in progress, please wait."
+        case .failedToExport: title = "Failed to export."
         }
         
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
