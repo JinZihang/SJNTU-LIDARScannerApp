@@ -7,8 +7,10 @@
 
 1. Toggle the camera view.
 2. Toggle the particles (point-cloud) view.
-3. Scan and store the point-cloud data.
-4. Clear current scan's data.
-5. Export current scan's point cloud data in the binary little endian PLY format.
-6. Export previous scans' data.
+3. Store and export current scan's world-map data.
+4. Export previous word-map data.
+5. Scan point-cloud data.
+6. Clear current scan's data.
+7. Store and export current scan's point cloud data in the binary little endian PLY format.
+8. Export previous scans' data.
 
