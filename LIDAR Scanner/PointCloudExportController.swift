@@ -114,7 +114,22 @@ class PointCloudExportController: UIViewController, UITextFieldDelegate {
         mainController.onExportError(error: error)
     }
     @objc func executeExport() -> Void {
-        let pointCloudFileName = !pointCloudFileNameInput.text!.isEmpty ? pointCloudFileNameInput.text : "untitled"
+        var pointCloudFileName = !pointCloudFileNameInput.text!.isEmpty ? pointCloudFileNameInput.text : "untitled"
+        
+        let desDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("PointClouds", isDirectory: true)
+        var desFilePath = desDirectory.appendingPathComponent("\(pointCloudFileName ?? "untitled").ply", isDirectory: false)
+        
+        var examinedName = pointCloudFileName
+        var renamingSuffix = 1
+        var isDirectory: ObjCBool = false
+        while FileManager.default.fileExists(atPath: String(desFilePath.absoluteString.dropFirst(7)), isDirectory: &isDirectory) {
+            examinedName = "\(pointCloudFileName ?? "untitled")(\(renamingSuffix))"
+            renamingSuffix += 1
+            
+            desFilePath = desDirectory.appendingPathComponent("\(examinedName ?? "untitled").ply", isDirectory: false)
+        }
+        pointCloudFileName = examinedName
         
         mainController.renderer.exportAsPlyFile(
             fileName: pointCloudFileName!,

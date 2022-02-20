@@ -128,14 +128,14 @@ class WorldMapExportController: UIViewController, UITextFieldDelegate {
         let srcFilePath = srcDirectory.appendingPathComponent("temp.arexperience", isDirectory: false)
         var desFilePath = desDirectory.appendingPathComponent("\(worldMapFileName ?? "untitled").arexperience", isDirectory: false)
         
+        var examinedName = worldMapFileName
         var renamingSuffix = 1
-        var newName = worldMapFileName
         isDirectory = false
         while FileManager.default.fileExists(atPath: String(desFilePath.absoluteString.dropFirst(7)), isDirectory: &isDirectory) {
-            newName = "\(worldMapFileName ?? "untitled")(\(renamingSuffix))"
+            examinedName = "\(worldMapFileName ?? "untitled")(\(renamingSuffix))"
             renamingSuffix += 1
             
-            desFilePath = desDirectory.appendingPathComponent("\(newName ?? "untitled").arexperience", isDirectory: false)
+            desFilePath = desDirectory.appendingPathComponent("\(examinedName ?? "untitled").arexperience", isDirectory: false)
         }
         
         do {
