@@ -30,7 +30,7 @@ final class PLYFile {
         
         // renderer.loadSavedPointClouds() makes sure the folder for storing point clouds exists
         let pointCloudDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("pointclouds", isDirectory: true)
+            .appendingPathComponent("PointClouds", isDirectory: true)
         
         let plyFile = pointCloudDirectory.appendingPathComponent("\(fileName).ply", isDirectory: false)
         FileManager.default.createFile(atPath: plyFile.path, contents: nil, attributes: nil)

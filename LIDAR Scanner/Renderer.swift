@@ -336,7 +336,7 @@ extension Renderer {
     
     func loadSavedPointClouds() {
         let pointCloudDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("pointclouds", isDirectory: true)
+            .appendingPathComponent("PointClouds", isDirectory: true)
         
         // Create the folder for storing point clouds if it the folder does not exist
         var isDirectory: ObjCBool = true

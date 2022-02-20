@@ -11,8 +11,11 @@ import MetalKit
 import ARKit
 
 final class MainController: UIViewController, ARSessionDelegate {
+    var worldMapURLs = [URL]()
+    var enteredAllWorldMapsViewFromMainView = true
+    
     private var saveWorldMapButton = UIButton(type: .system)
-    private var selectWorldMapButton = UIButton(type: .system)
+    private var viewAllWorldMapsButton = UIButton(type: .system)
     private var loadWorldMapButton = UIButton(type: .system)
     private var toggleScanButton = UIButton(type: .system)
     private var toggleCameraViewButton = UIButton(type: .system)
@@ -69,8 +72,8 @@ final class MainController: UIViewController, ARSessionDelegate {
         saveWorldMapButton.isEnabled = false
         view.addSubview(saveWorldMapButton)
         
-        selectWorldMapButton = createMainViewButton(iconName: "text.justify")
-        view.addSubview(selectWorldMapButton)
+        viewAllWorldMapsButton = createMainViewButton(iconName: "text.justify")
+        view.addSubview(viewAllWorldMapsButton)
         
         loadWorldMapButton = createMainViewButton(iconName: "mappin.slash")
         loadWorldMapButton.isEnabled = false
@@ -100,10 +103,10 @@ final class MainController: UIViewController, ARSessionDelegate {
             saveWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
             saveWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             
-            selectWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
-            selectWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
-            selectWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
-            selectWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+            viewAllWorldMapsButton.widthAnchor.constraint(equalToConstant: 40),
+            viewAllWorldMapsButton.heightAnchor.constraint(equalToConstant: 40),
+            viewAllWorldMapsButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
+            viewAllWorldMapsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             
             loadWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
             loadWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
@@ -161,10 +164,14 @@ final class MainController: UIViewController, ARSessionDelegate {
     @objc func viewValueChanged(view: UIView) {
         switch view {
         case saveWorldMapButton:
-            break
+            pauseScan()
+            saveWorldMap()
+            goToWorldMapExportView()
             
-        case selectWorldMapButton:
-            break
+        case viewAllWorldMapsButton:
+            pauseScan()
+            enteredAllWorldMapsViewFromMainView = true
+            goToAllWorldMapsView()
             
         case loadWorldMapButton:
             break
@@ -187,25 +194,21 @@ final class MainController: UIViewController, ARSessionDelegate {
         case toggleParticlesButton:
             renderer.showParticles = !renderer.showParticles
             if (!renderer.showParticles) {
-                renderer.isInViewSceneMode = true
-                self.toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
+                pauseScan()
             }
             let iconName = "circle.grid.hex" + (renderer.showParticles ? ".fill" : "")
             self.toggleParticlesButton.setBackgroundImage(.init(systemName: iconName), for: .normal)
             
         case clearParticlesButton:
-            renderer.isInViewSceneMode = true
-            toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
+            pauseScan()
             renderer.clearParticles()
             
         case exportPointCloudButton:
-            renderer.isInViewSceneMode = true
-            toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
+            pauseScan()
             goToPointCloudExportView()
         
         case supportButton:
-            renderer.isInViewSceneMode = true
-            toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
+            pauseScan()
             goToInstructionsView()
             
         default:
@@ -221,6 +224,23 @@ final class MainController: UIViewController, ARSessionDelegate {
     }
     
     // MARK: - AR Session Observer
+    
+    func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
+        return true
+    }
+    
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        // Enable exporting world map only when the mapping status is good
+        switch frame.worldMappingStatus {
+        case .mapped, .extending:
+            saveWorldMapButton.isEnabled = true
+            saveWorldMapButton.setBackgroundImage(.init(systemName: "square.and.arrow.down"), for: .normal)
+        
+        default:
+            saveWorldMapButton.isEnabled = false
+            saveWorldMapButton.setBackgroundImage(.init(systemName: "location.slash"), for: .normal)
+        }
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -247,6 +267,47 @@ final class MainController: UIViewController, ARSessionDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    // MARK: - World Map Functionality
+    
+    private func generateWorldMapURL() -> URL {
+        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("WorldMaps", isDirectory: true)
+        
+        var isDirectory: ObjCBool = true
+        if !FileManager.default.fileExists(atPath: directory.absoluteString, isDirectory: &isDirectory) {
+            do {
+                try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+            }
+            catch {
+                fatalError("Failed to create a directory for storing world maps: \(error.self)")
+            }
+        }
+        
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("WorldMaps", isDirectory: true)
+            .appendingPathComponent("temporary.arexperience", isDirectory: false)
+        
+        worldMapURLs.append(url)
+        return url
+    }
+    
+    private func saveWorldMap() -> Void {
+        session.getCurrentWorldMap { worldMap, error in
+            guard let worldMapData = worldMap
+            else {
+                self.displayErrorMessage(error: XError.failedToGetWorldMap)
+                return
+            }
+            
+            do {
+                let data = try NSKeyedArchiver.archivedData(withRootObject: worldMapData, requiringSecureCoding: true)
+                try data.write(to: self.generateWorldMapURL(), options: [.atomic])
+            } catch {
+                fatalError("Failed to save the current world map: \(error.localizedDescription)")
+            }
+        }
+    }
 }
 
 // MARK: - MTK View Delegate
@@ -266,6 +327,16 @@ extension MainController: MTKViewDelegate {
 // MARK: - Extra Controller Functionality
 
 extension MainController {
+    func goToWorldMapExportView() -> Void {
+        let worldMapExportController = WorldMapExportController()
+        worldMapExportController.mainController = self
+        present(worldMapExportController, animated: true, completion: nil)
+    }
+    func goToAllWorldMapsView() -> Void {
+        let allWorldMapsController = AllWorldMapsController()
+        allWorldMapsController.mainController = self
+        present(allWorldMapsController, animated: true, completion: nil)
+    }
     func goToPointCloudExportView() -> Void {
         let pointCloudExportController = PointCloudExportController()
         pointCloudExportController.mainController = self
@@ -280,6 +351,19 @@ extension MainController {
         let instructionsController = InstructionsController()
         instructionsController.mainController = self
         present(instructionsController, animated: true, completion: nil)
+    }
+    
+    func loadSavedWorldMaps() {
+        let worldMapDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("WorldMaps", isDirectory: true)
+        
+        worldMapURLs = try! FileManager.default
+            .contentsOfDirectory(at: worldMapDirectory, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+    }
+    
+    private func pauseScan() -> Void {
+        renderer.isInViewSceneMode = true
+        toggleScanButton.setBackgroundImage(.init(systemName: "livephoto"), for: .normal)
     }
     
     func displayErrorMessage(error: XError) -> Void {
