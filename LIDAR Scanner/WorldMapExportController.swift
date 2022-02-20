@@ -111,20 +111,33 @@ class WorldMapExportController: UIViewController, UITextFieldDelegate {
     @objc func executeExport() -> Void {
         let worldMapFileName = !worldMapFileNameInput.text!.isEmpty ? worldMapFileNameInput.text : "untitled"
         
-        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("WorldMaps", isDirectory: true)
-        let originalPath = directory.appendingPathComponent("temporary.arexperience", isDirectory: false)
-        let destinationPath = directory.appendingPathComponent("\(worldMapFileName ?? "untitled").arexperience", isDirectory: false)
+        let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let srcDirectory = docDirectory.appendingPathComponent("WorldMapTemp", isDirectory: true)
+        let desDirectory = docDirectory.appendingPathComponent("WorldMaps", isDirectory: true)
+        
+        var isDirectory: ObjCBool = true
+        if !FileManager.default.fileExists(atPath: desDirectory.absoluteString, isDirectory: &isDirectory) {
+            do {
+                try FileManager.default.createDirectory(at: desDirectory, withIntermediateDirectories: true, attributes: nil)
+            }
+            catch {
+                fatalError("Failed to create a directory for storing world maps: \(error.self)")
+            }
+        }
+        
+        let srcFilePath = srcDirectory.appendingPathComponent("temp.arexperience", isDirectory: false)
+        let desFilePath = desDirectory.appendingPathComponent("\(worldMapFileName ?? "untitled").arexperience", isDirectory: false)
         
         do {
-            try FileManager.default.moveItem(at: originalPath, to: destinationPath)
+            try FileManager.default.moveItem(at: srcFilePath, to: desFilePath)
+            mainController.worldMapURLs.append(desFilePath)
         }
         catch {
             fatalError("Failed to rename the world map file: \(error.self)")
         }
         
         dismissModal()
-        mainController.export(url: destinationPath)
+        mainController.export(url: desFilePath)
     }
     
     @objc func goToMainView() -> Void {

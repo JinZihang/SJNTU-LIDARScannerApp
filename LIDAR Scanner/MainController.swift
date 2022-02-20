@@ -272,7 +272,7 @@ final class MainController: UIViewController, ARSessionDelegate {
     
     private func generateWorldMapURL() -> URL {
         let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("WorldMaps", isDirectory: true)
+            .appendingPathComponent("WorldMapTemp", isDirectory: true)
         
         var isDirectory: ObjCBool = true
         if !FileManager.default.fileExists(atPath: directory.absoluteString, isDirectory: &isDirectory) {
@@ -285,10 +285,9 @@ final class MainController: UIViewController, ARSessionDelegate {
         }
         
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("WorldMaps", isDirectory: true)
-            .appendingPathComponent("temporary.arexperience", isDirectory: false)
+            .appendingPathComponent("WorldMapTemp", isDirectory: true)
+            .appendingPathComponent("temp.arexperience", isDirectory: false)
         
-        worldMapURLs.append(url)
         return url
     }
     
@@ -356,6 +355,16 @@ extension MainController {
     func loadSavedWorldMaps() {
         let worldMapDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("WorldMaps", isDirectory: true)
+        
+        var isDirectory: ObjCBool = true
+        if !FileManager.default.fileExists(atPath: worldMapDirectory.absoluteString, isDirectory: &isDirectory) {
+            do {
+                try FileManager.default.createDirectory(at: worldMapDirectory, withIntermediateDirectories: true, attributes: nil)
+            }
+            catch {
+                fatalError("Failed to create a directory for storing world maps: \(error.self)")
+            }
+        }
         
         worldMapURLs = try! FileManager.default
             .contentsOfDirectory(at: worldMapDirectory, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
