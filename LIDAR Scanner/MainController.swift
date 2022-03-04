@@ -16,7 +16,6 @@ final class MainController: UIViewController, ARSessionDelegate {
     
     private var saveWorldMapButton = UIButton(type: .system)
     private var viewAllWorldMapsButton = UIButton(type: .system)
-    private var loadWorldMapButton = UIButton(type: .system)
     private var toggleScanButton = UIButton(type: .system)
     private var toggleCameraViewButton = UIButton(type: .system)
     private var toggleParticlesButton = UIButton(type: .system)
@@ -75,10 +74,6 @@ final class MainController: UIViewController, ARSessionDelegate {
         viewAllWorldMapsButton = createMainViewButton(iconName: "text.justify")
         view.addSubview(viewAllWorldMapsButton)
         
-        loadWorldMapButton = createMainViewButton(iconName: "mappin.slash")
-        loadWorldMapButton.isEnabled = false
-        view.addSubview(loadWorldMapButton)
-        
         toggleScanButton = createMainViewButton(iconName: "livephoto")
         view.addSubview(toggleScanButton)
         
@@ -107,11 +102,6 @@ final class MainController: UIViewController, ARSessionDelegate {
             viewAllWorldMapsButton.heightAnchor.constraint(equalToConstant: 40),
             viewAllWorldMapsButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 105),
             viewAllWorldMapsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
-            
-            loadWorldMapButton.widthAnchor.constraint(equalToConstant: 40),
-            loadWorldMapButton.heightAnchor.constraint(equalToConstant: 40),
-            loadWorldMapButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 170),
-            loadWorldMapButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             
             toggleScanButton.widthAnchor.constraint(equalToConstant: 40),
             toggleScanButton.heightAnchor.constraint(equalToConstant: 40),
@@ -172,9 +162,6 @@ final class MainController: UIViewController, ARSessionDelegate {
             pauseScan()
             enteredAllWorldMapsViewFromMainView = true
             goToAllWorldMapsView()
-            
-        case loadWorldMapButton:
-            break
             
         case toggleScanButton:
             renderer.isInViewSceneMode = !renderer.isInViewSceneMode
