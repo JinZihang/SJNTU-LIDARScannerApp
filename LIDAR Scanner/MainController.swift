@@ -383,11 +383,19 @@ extension MainController {
         renderer.savingError = nil
     }
     func export(url: URL) -> Void {
-        present(
-            UIActivityViewController(
-                activityItems: [url as Any],
-                applicationActivities: .none),
-            animated: true)
+        let activityViewController = UIActivityViewController(activityItems: [url as Any], applicationActivities: .none)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activityViewController.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
+            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: 100, height: 100)
+            activityViewController.popoverPresentationController?.permittedArrowDirections = [.down]
+        }
+        UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        
+//        present(
+//            UIActivityViewController(
+//                activityItems: [url as Any],
+//                applicationActivities: .none),
+//            animated: true)
     }
     func afterExport() -> Void {
         let err = renderer.savingError
