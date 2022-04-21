@@ -30,7 +30,7 @@ final class Renderer {
     }
     
     // Maximum number of points we store in the point cloud
-    private let maxPoints = 15_000_000
+    private let maxPoints = 25_000_000
     // Number of sample points on the grid
     private var numGridPoints = 2_000
     // Particle's size in pixels
